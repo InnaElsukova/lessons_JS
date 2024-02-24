@@ -1,0 +1,58 @@
+
+body {
+    font-family: "Causten", sans-serif;
+    color: #4a5a1c;
+    background-color: #cad473;
+    font-size: 18px;
+}
+
+.wrapper {
+    overflow: clip;
+    min-height: 100%;
+}
+
+[class*="__container"] {
+    max-width: 1270px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    border-bottom: 1px solid #8b9c3d;
+    padding: 20px 0;
+}
+
+h1 {
+    font-size: 32px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.page {
+    padding-top: 80px;
+}
+
+ol {
+    margin-left: 25px;
+}
+
+li {
+    list-style: decimal;
+}
+
+li:hover a {
+    text-decoration: underline;
+}
+
+li:not(:last-child) {
+    margin-bottom: 8px;
+}

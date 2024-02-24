@@ -1,0 +1,81 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 6</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 6</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>З клавіатури вводяться вартість товару та кількість одиниць 3 товарів. Обчислити вартість кожного товару окремо та
+            загальну вартість. Вивести чек (як у супермаркеті) використовуючи елементи розмітки.</p>
+            
+
+            <script>
+                const goodCount1 = parseFloat(prompt('Товар 1. Введіть кількість', 1))
+                const goodPrice1 = parseFloat(prompt('Товар 1. Введіть вартість', 10))
+
+                const goodCount2 = parseFloat(prompt('Товар 2. Введіть кількість', 1))
+                const goodPrice2 = parseFloat(prompt('Товар 2. Введіть вартість', 20))
+
+                const goodCount3 = parseFloat(prompt('Товар 3. Введіть кількість', 1))
+                const goodPrice3 = parseFloat(prompt('Товар 3. Введіть вартість', 30))    
+                
+
+                if (goodCount1 < 0 || Number.isNaN(goodCount1) ||
+                    goodCount2 < 0 || Number.isNaN(goodCount3) ||
+                    goodCount3 < 0 || Number.isNaN(goodCount3) ||
+                    goodPrice1 < 0 || Number.isNaN(goodPrice1) ||
+                    goodPrice2 < 0 || Number.isNaN(goodPrice2) ||
+                    goodPrice3 < 0 || Number.isNaN(goodPrice3) 
+                )
+                    document.write(`Обчислення неможливе, введіть коректні дані (додатнє число)`)  
+                else {
+                    const goodCost1 = goodCount1 * goodPrice1
+                    const goodCost2 = goodCount2 * goodPrice2
+                    const goodCost3 = goodCount3 * goodPrice3
+                    const goodCostTotal = goodCost1 + goodCost2 + goodCost3
+
+                    document.write(`
+                    <div style="border: 1px solid black; display:inline-block; padding: 5px">
+                    <div>Фіскальний чек</div>
+                    
+                    <div>Товар 1</div>
+                    <span>${goodPrice1}  грн</span>
+                    <span>х</span>
+                    <span>${goodCount1}&nbsp&nbsp&nbsp&nbsp</span>
+                    <span>${goodCost1} грн</span>
+                    
+                    <div>Товар 2</div>
+                    <span>${goodPrice2} грн</span>
+                    <span>х</span>
+                    <span>${goodCount2}&nbsp&nbsp&nbsp&nbsp</span>
+                    <span>${goodCost2} грн</span>
+                    
+                    <div>Товар 3</div>
+                    <span>${goodPrice3} грн</span>
+                    <span>х</span>
+                    <span>${goodCount3}&nbsp&nbsp&nbsp&nbsp</span>
+                    <span>${goodCost3} грн</span>
+                    
+                    <div>----------------------</div>
+                    <div>Всього-${goodCostTotal} грн</div>
+                    </div>
+                `) 
+
+                }
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

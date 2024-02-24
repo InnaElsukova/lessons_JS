@@ -1,0 +1,38 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 5</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 5</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>Дано кількість секунд, що пройшла від початку доби. Визначити скільки це годин і хвилин.</p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const seconds = parseInt(prompt('Введіть кількість секунд від початку доби', 2000))
+                if(seconds < 0 || Number.isNaN(seconds))
+                    log(`Обчислення неможливе, введіть коректні дані (додатнє число)`)  
+                else {
+                    const hours = Math.floor(seconds / 3600)
+                    let leftSec = seconds % 3600
+                    const min = Math.floor(leftSec / 60)
+                    leftSec = leftSec % 60
+                    log(`З початку доби пройшло ${seconds} секунд, якщо перевести в години та хвилини ${hours}:${min}:${leftSec}`)
+                }   
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

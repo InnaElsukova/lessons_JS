@@ -1,0 +1,40 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 4</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>Дано довжину у сантиметрах. Визначати скільки це метрів і кілометрів.</p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const lengthCm = parseFloat(prompt('Введіть довжину в сантиметрах', 100))
+                const lengthMeters = lengthCm / 100
+                const lengthKm = lengthCm / 100000
+
+                if(Number.isNaN(lengthCm) || lengthCm<0)
+                    log(`Обчислення неможливе, введіть коректні дані (додатнє число)`)  
+                else {
+                    log(`Введено значення ${lengthCm} сантиметрів`)
+                    log(`Що станивить:`)
+                    log(`     - ${lengthMeters.toFixed(2)} метрів`)
+                    log(`     - ${lengthKm.toFixed(2)} кілометрів`)  
+                }
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

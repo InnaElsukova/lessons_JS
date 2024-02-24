@@ -1,0 +1,65 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 0</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 0</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>Обчислити значення виразів</p>
+            <ol>
+                <li>
+                    S1=a+12+b
+                </li>
+                <li>
+                    S2=Math.sqrt((a+b)/2a)
+                </li>
+                <li>
+                    S3=Math.cbrt((a+b)*c)
+                </li>
+                <li>
+                    S4=sin(a/-b)
+                </li>
+            </ol>
+            <script src="../js/script.js"></script>
+            <script>
+                let a = parseFloat(prompt('Введіть a', 0))
+                let b = parseFloat(prompt('Введіть b', 0))
+                let c = parseFloat(prompt('Введіть c', 0))
+                // task 1
+                let s1 = a + 12 + b
+                log(`Введені дані: a = ${a}, b = ${b}, c = ${c} \n`)     
+                log(`Відповідь 1: S1 = ${s1}`)   
+
+                // task 2
+                let s2=(a+b)/(2*a)
+                if(s2<0)
+                    log(`Відповідь 2: неможливо обчислити S2, корінь з від'ємного числа`)    
+                else
+                    log(`Відповідь 2: S2 = ${Math.sqrt(s2)}`)
+
+                // task 3
+                let s3= Math.cbrt((a + b) * c)
+                log(`Відповідь 3: S3 = ${s3}`)  
+
+                // task 4
+                let s4=Math.sin(a/(-b))
+                log(`Відповідь 4: S4 = ${s4}`)  
+
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 3</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>Дано вартість одиниці товару і кількість. Знайти загальну вартість та ПДВ (5% від загальної вартості).</p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+
+                let productPrice = parseFloat(prompt('Введіть вартість одиниці товара', 1))
+                let productCount = parseFloat(prompt('Введіть кількість товара', 1))
+                const VAT = 0.05
+                
+                if(productPrice<0 || productCount<0 || Number.isNaN(productPrice) || Number.isNaN(productCount) ) 
+                    log(`Обчислення неможливе, введіть коректні дані (додатні числа)`)    
+                else {
+                    let totalPrice = productPrice * productCount;
+                    let totalVAT = totalPrice * VAT;
+                    log(`Ціна - ${productPrice}`)
+                    log(`Кількість - ${productCount}`)
+                    log(`---------------------------`)
+                    log(`Вартість - ${totalPrice}`)
+                    log(`Всього ПДВ - ${totalVAT}`)
+                }
+                       
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>
