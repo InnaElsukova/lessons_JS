@@ -1,0 +1,47 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 5</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 5</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                З клавіатури вводиться назва категорії водія (А-мотоцикл, В-легковий автомобіль, С-вантажний автомобіль). Вивести на
+                екран назву транспортного засобу, яким він може керувати.
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const driverCategory = prompt('Введіть категорію водія - А, В, С', "A")
+                switch (driverCategory) {
+                    case 'A':
+                        log(`Категорія ${driverCategory} - мотоцикл`)
+                        break
+                    case 'B':
+                        log(`Категорія ${driverCategory} - легковий автомобіль`)
+                        break
+                    case 'C':
+                        log(`Категорія ${driverCategory} - вантажний автомобіль`)
+                        break
+                    default:
+                        log(`Невірно введені дані. Категорія може бути тільки А, В, С`)
+                        break
+                    
+            }
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

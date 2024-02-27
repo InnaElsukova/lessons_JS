@@ -1,0 +1,60 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 7</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 7</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>З клавіатури вводиться номер місяця. Вивести до якої пори він відноситься</p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const month = parseInt(prompt('Введіть номер місяця 1-12 (1 - січень і т.д.)', 1))
+
+                switch (month) {
+                    case 12:
+                    case 1:
+                    case 2:
+                        log(`Місяць ${month} - зима`)    
+                        break
+                    case 3:
+                    case 4:
+                    case 5:
+                        log(`Місяць ${month} - весна`)
+                        break
+                    case 6:
+                    case 7:
+                    case 8:
+                        log(`Місяць ${month} - літо`)
+                        break
+                    case 9:
+                    case 10:
+                    case 11:
+                        log(`Місяць ${month} - осінь`)
+                        break
+                    default:
+                        log(`Некоректно введений номер місяця - треба ввести номер від 1 до 12`)
+                        break                        
+
+                }
+
+                
+                log(`Згенерований номер дня - ${randomDay}`)    
+                log(`Сума  - ${randomMonth + randomDay}`)    
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

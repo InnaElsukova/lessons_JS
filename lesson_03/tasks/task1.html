@@ -1,0 +1,47 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header__container">
+                <h1>Задача 1</h1>
+            </div>
+        </header>   
+        <main class="page">
+            <div class="page__container">
+                <p>
+                    З клавіатури вводяться імена двох дітей та кількість у них цукерок. Вивести не екран ім’я тієї дитини, у якої кількість
+                    цукерок є більшою, або вивести, що кількість однакова.
+                </p>
+                
+                <script src="../js/script.js"></script>
+                <script>
+                    const childName1 = prompt('Як звати першу дитину', 'Маша')
+                    const candyCount1 = parseInt(prompt(`Скільки ${childName1} має цукерок?`, 1))
+                    const childName2 = prompt('Як звати другу дитину', 'Сашко')
+                    const candyCount2 = parseInt(prompt(`Скільки ${childName2} має цукерок?`, 1))
+                    
+                    let message
+                    console.log(isNaN(candyCount1));
+                    if(candyCount1<0 || candyCount2<0 || isNaN(candyCount1) || isNaN(candyCount2))
+                        message = "Введіть коректні дані (кількість цукерок - додатнє число)"
+                    else if (candyCount1 > candyCount2)
+                        message = `${childName1} має більше цукерок, ніж ${childName2}`
+                    else if (candyCount1 < candyCount2)
+                        message = `${childName2} має більше цукерок, ніж ${childName1}`
+                    else
+                        message = `Цукерок порівну`
+                    log(message)    
+         
+                </script>
+            </div>
+        </main>     
+    </div>
+</body>
+</html>

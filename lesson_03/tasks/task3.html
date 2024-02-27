@@ -1,0 +1,46 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 3</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>Випадковим чином генерується число від 1 до 5. Спробуйте вгадати число за 2 спроби.</p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+
+                const randomNumber = 1 + Math.floor(Math.random() * 5)
+
+                let enteredNumber = parseInt(prompt('Спробуйте вгадати число від 1 до 5', 1))
+                if (enteredNumber <1 || enteredNumber >5 || isNaN(enteredNumber))
+                    log(`Треба ввести число від 1 до 5`)
+                else if (randomNumber === enteredNumber)
+                    log(`Ви вгадали - згенероване число ${randomNumber}`)
+                else {
+                    enteredNumber = parseInt(prompt('Спроба №2. введіть число від 1 до 5', 1))
+                    if (enteredNumber < 1 || enteredNumber > 5 || isNaN(enteredNumber))
+                        log(`Треба ввести число від 1 до 5`)
+                    else if (randomNumber === enteredNumber)
+                        log(`Ви вгадали - згенероване число ${randomNumber}`)
+                    else
+                        log(`He вгадали - згенероване число ${randomNumber}`)
+                }
+                       
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

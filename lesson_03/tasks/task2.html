@@ -1,0 +1,42 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 2</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>З клавіатури вводиться ціна товару і кількість грошей. Якщо грошей не вистачає то відмовляємо у покупці, інакше, якщо ще
+            залишаються гроші, то пропонуємо купити лотерею за 4 грн.</p>
+          
+            <script src="../js/script.js"></script>
+            <script>
+                const goodPrice = parseFloat(prompt('Яка вартість товару?', 100))
+                const moneyCount = parseFloat(prompt('Скільки маєте грошей?', 100))
+                const ticketPrice = 4
+                const change = moneyCount - goodPrice
+                if(change < 0)
+                    log(`В покупці відмовлено. Вам не вистачає ${-change} гривень.`)    
+                else if (change > 0) {
+                    let ticketCount = Math.floor(change / ticketPrice)
+                    if (ticketCount > 0)
+                        log(`Пропонуємо купити ${ticketCount} лотерейних квитків по ${ticketPrice} грн. У вас лишиться грн ${change - ticketCount * ticketPrice}`)
+                }
+                else
+                    log(`У вас рівно вистачить грошей на покупку - без решти`)
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

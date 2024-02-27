@@ -1,0 +1,48 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 4</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>З клавіатури вводиться вік людини. Вивести на екран ким він є (дитиною у садочку, школярем, студентом, працівником,
+            пенсіонером).</p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const age = parseInt(prompt('Вік людини', 10))
+
+                if(isNaN(age) || age < 0)
+                    log(`Обчислення неможливе, введіть коректні дані (додатнє число)`)  
+                else if (age < 3) 
+                    log(`Вік - ${age} р. - немовля`)
+                else if (age < 6)
+                    log(`Вік - ${age} р. - дитсадок`)
+                else if (age < 18)
+                    log(`Вік - ${age} р. - школяр`)
+                else if (age < 22)
+                    log(`Вік - ${age} р. - студент`)
+                else if (age < 60)
+                    log(`Вік - ${age} р. - працівник`)
+                else if (age < 110)
+                    log(`Вік - ${age} р. - пенсіонер`)
+                else
+                    log(`Вік - ${age} р. - дууууже стара людина`)
+                
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>
