@@ -1,0 +1,70 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 13</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        td {
+            width: 40px;
+            height: 40px;
+            background-color: rgb(137, 198, 255);
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 13</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>Морський бій. Комп’ютер випадково розташовує одиночний корабель на полі розміром N*M. Маючи К снарядів користувач
+            намагається потопити корабель.</p>
+
+            <script src="../js/script.js"></script>
+            <script>
+                const rowCount = parseInt(prompt('Введіть кількість рядків',3))
+                const columnCount = parseInt(prompt('Введіть кількість стовпчиків', 3))
+                const bulletCount = parseInt(prompt('Введіть кількість снарядів', 3))
+
+                const shipCoordinateX=1 + Math.floor(Math.random()*columnCount)
+                const shipCoordinateY = 1 + Math.floor(Math.random() * rowCount)
+
+                let coordinateX, coordinateY
+                for(let i = 1; i <= bulletCount; i++) {
+                    coordinateY = parseInt(prompt('Введіть номер рядка',1))
+                    coordinateX = parseInt(prompt('Введіть номер стовпчика',1))
+                    if(coordinateX === shipCoordinateX && coordinateY === shipCoordinateY) {
+                        alert('Вітаю! Ви влучили')
+                        break
+                    }
+                    else
+                        alert('Промах (')
+
+                }
+
+                log(`Координати корабля (стовпчик, рядок) - (${shipCoordinateX}, ${shipCoordinateY})`)
+
+                document.write('<table>')
+                for(let i = 1; i <= rowCount; i++) {
+                    document.write('<tr>')
+                        for(let j = 1; j <=columnCount; j++) {
+                            if(i === shipCoordinateY && j === shipCoordinateX)
+                                document.write('<td><img width="38px" src="./img/ship.svg" alt="ship"></td>')
+                            else
+                                document.write('<td></td>')
+                        }
+                    document.write('</tr>')
+                }
+                document.write('</table>')
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

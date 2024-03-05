@@ -1,0 +1,90 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 12</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .slot {
+            display: inline-flex;
+            gap: 5px;
+            padding: 5px;
+            margin: 10px;
+            border-radius: 10px;
+            background-color: black;
+            height: 210px;
+        }
+        .slot img {
+            flex: 0 0 200px;
+            width: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 3px solid black;
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 12</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>Ігровий автомат. Випадково вибираємо зображення у 3 позиціях. Вибір у кожній позиції вибирається як одне з чотирьох
+            зображень. Вивести ці зображення і повідомити виграш користувача (
+            три перших зображення <img width="30px" src="./img/pic1.jpg" alt="pic1"> 100 грн, 
+            три других <img width="30px" src="./img/pic2.jpg" alt="pic2"> – 200, 
+            три третіх <img width="30px" src="./img/pic3.jpg" alt="pic3"> – 500, 
+            три четвертих зображення <img width="30px" src="./img/pic4.jpg" alt="pic4"> – 1000грн). 
+            Використати цикли і switch (для вибору зображення за номером).</p>
+
+            <script src="../js/script.js"></script>
+            <script>
+                let randomPicNum
+                let pic1 = 0
+                let pic2 = 0
+                let pic3 = 0
+                let pic4 = 0
+                document.write('<div class="slot">')
+                for(let i = 0; i < 3; i++) {
+                    randomPicNum=1+Math.floor(Math.random()*4)
+                    document.write(`<img src="./img/pic${randomPicNum}.jpg" alt="pic${randomPicNum}">`)
+                    switch(randomPicNum) {
+                        case 1:
+                            pic1++
+                            break
+                        case 2:
+                            pic2++
+                            break
+                        case 3:
+                            pic3++
+                            break
+                        case 4:
+                            pic4++
+                            break
+                    }
+                }
+                document.write('</div>')
+
+                if(pic1 === 3)
+                    log('Ваш виграш 100 грн')
+                else if (pic2 === 3)
+                    log('Ваш виграш 200 грн')
+                else if (pic3 === 3)
+                    log('Ваш виграш 500 грн')
+                else if (pic4 === 3)
+                    log('Ваш виграш 1000 грн')
+                else
+                    log('Ви не виграли, спробуйте ще!')
+
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

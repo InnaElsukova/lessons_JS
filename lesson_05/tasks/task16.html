@@ -1,0 +1,46 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 13</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 13</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Користувач поступово вводить прибуток магазину за кожен день протягом N тижнів. Знайти загальну величину прибутку та
+            вивести величину прибутку протягом кожного окремого тижня.
+            </p>
+
+            <script src="../js/script.js"></script>
+            <script>
+                const weekCount = parseInt(prompt('Введіть кількість тижнів для підрахунку прибутку', 1))
+                let profit
+                let profitTotal = 0
+                let profitPerWeek = 0
+                for(let week = 1; week <= weekCount; week++) {
+                    for(let day = 1; day <=7; day++) {
+                        profit = parseInt(prompt(`Тиждень ${week} день ${day}. Введіть прибуток`, 1))
+                        profitPerWeek += profit
+                    }
+                    log(`Прибуток за тиждень ${week} склав ${profitPerWeek} грн`)
+                    profitTotal +=profitPerWeek
+                    profitPerWeek = 0
+                }
+                log(`Загальний прибуток склав ${profitTotal} грн`)
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

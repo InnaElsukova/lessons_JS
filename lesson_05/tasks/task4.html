@@ -1,0 +1,37 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 4</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>Вивести таблицю з 3 рядків і 7 стовпців</p>
+            
+            <script>
+                const elenentCount = 7
+                const rowtCount = 3
+                document.write(`<table">`)
+                    for(let row = 1; row <= rowtCount; row++) {
+                        document.write('<tr>')
+                        for (let element = 1; element <= elenentCount; element++)
+                            document.write(`<td>${element}</td>`)
+                        document.write('</tr>')
+                    }
+                document.write('</table>')                
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

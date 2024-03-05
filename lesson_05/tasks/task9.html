@@ -1,0 +1,52 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 9</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 9</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>Користувач загадує число. Комп’ютер задає питання поки не вгадає число користувача (використати confirm).</p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                alert('Загадайте число від 1 до 10')
+                let answer = confirm('Задумане число більше 5?')
+                if(answer)
+                    for(let i=6; i<=10; i++) {
+                        answer = confirm(`Задумане число ${i}?`)
+                        if(answer) {
+                            log(`Ура, я вгадав задумане число - ${i}`);
+                            break
+                        }
+                    }
+                else
+                    for(let i=1; i<=5; i++) {
+                        answer = confirm(`Задумане число ${i}?`)
+                        if (answer) {
+                            log(`Ура, я вгадав задумане число - ${i}`);
+                            break
+                        }
+                }
+
+                if(!answer) {
+                    log('Щось пішло не так - ви не обрали жодну відповідь')
+                }
+
+                
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

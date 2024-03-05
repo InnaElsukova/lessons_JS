@@ -1,0 +1,47 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 8</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 8</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>Користувач загадує число. За 3 спроби комп’ютер намагається вгадати число користувача (використати confirm).</p>
+            
+            <script>
+                alert('Загадайте число від 1 до 10. Спробую вгадати за 3 спроби)')
+                let num
+                let userTry = 1
+                let answeNum
+                // do {
+                //     num = 1 + Math.floor(Math.random() * 10)
+                //     answeNum = confirm(`Ви загадали число ${num}?`)
+                //     userTry++
+                // } while (!answeNum&&userTry<=3)
+
+                for(let i=0; i<3; i++) {
+                    num = 1 + Math.floor(Math.random() * 10)
+                    answeNum = confirm(`Ви загадали число ${num}?`)
+                    if(answeNum) {
+                        document.write(`Вітаю! Задумане число ${num}`)
+                        break
+                    }
+                }
+                if(!answeNum)
+                    document.write(`Не вийшло( Задумане число ${num}`)
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>
