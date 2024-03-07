@@ -1,0 +1,45 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 5</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 5 (20)</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                З клавіатури вводяться n чисел та саме значення n. Написати програму, яка підраховує кількість від’ємних, додатних та
+                нульових чисел серед введених.
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const countNumbers = parseInt(prompt("Введіть кількіть чисел для підрахунку"))
+                let positiveCount = 0, negativeCount = 0, nullCount = 0
+                for(let count = 1; count <=countNumbers; count++) {
+                    let enteredNumber = parseFloat(prompt(`Введіть число ${count}/${countNumbers}`))
+                    if(enteredNumber>0) 
+                        positiveCount++
+                    else if(enteredNumber<0)
+                        negativeCount++
+                    else
+                        nullCount++
+                }     
+                log(`Додатніх чисел - ${positiveCount}`);
+                log(`Від'ємних чисел - ${negativeCount}`);
+                log(`Нулів - ${nullCount}`);    
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

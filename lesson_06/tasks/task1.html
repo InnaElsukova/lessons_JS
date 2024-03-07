@@ -1,0 +1,59 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header__container">
+                <h1>Задача 1 (6)</h1>
+            </div>
+        </header>   
+        <main class="page">
+            <div class="page__container">
+                <p>
+                    Інвестор вклав S тис. грн на 20 років під 20% річних, податок складає 5% від суми прибутку. Визначити за допомогою циклів
+                    суму, яку він одержить.
+                </p>
+
+                <script src="../js/script.js"></script>
+                <script>
+                    const depositSum = parseFloat(prompt('Введіть суму депозиту в грн. Умови: 20% річних, податок на прибуток 5%, нарахування відсотків щомісяця', 100))
+                    const depositPersent = 0.2
+                    const tax = 0.05
+                    const payedTax = 1-tax
+
+                    // Простий відсоток, нарахований за 20 років
+                    const userPersentSimple = depositSum * 0.2 * 20
+                    const userProfitSimple = userPersentSimple * payedTax
+                   
+                    // Розрахунок складного відсотка
+                    let depositSumCalc = depositSum
+                    for(let year = 1; year <= 20; year++){
+                        for(let month = 1; month <= 12; month++) {
+                            const userPersentPerMonth = depositSumCalc * depositPersent / 12 * payedTax
+                            depositSumCalc += userPersentPerMonth
+
+                            console.log(`Year ${year}. Month${month} `)
+                            console.log(`Нараховано % за місяць = ${userPersentPerMonth}`)   
+                            console.log(`Всього на депозитному рахунку =${depositSumCalc}`)    
+                        }
+                    }
+                    
+                    log("Простий відсоток. Нараховані відсотки не приєднуються до суми вкладу")
+                    log(`Розмір вкладу ${depositSum} грн, термін - 20 років, відсотки після сплати податку ${userProfitSimple} грн, всього виплачено ${depositSum + userProfitSimple}.`)
+                    log("")
+                    log("Складний відсоток. Відсотки нараховуються щомісяця та додаються до суми вкладу")
+                    log(`Розмір вкладу ${depositSum} грн, термін - 20 років, сума виплати ${depositSumCalc.toFixed(2)} грн.`)
+
+
+                </script>
+            </div>
+        </main>     
+    </div>
+</body>
+</html>

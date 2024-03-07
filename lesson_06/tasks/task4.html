@@ -1,0 +1,56 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 4 (23)</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>Розпочавши тренування, спортсмен першого дня пробіг 10 км. Щодня він збільшував денну норму на 10% від норми
+            попереднього дня. Який сумарний шлях пробіжить спортсмен за 7 днів? Якого дня вперше спортсмен пробіжить понад 20 км?
+            Якого дня вперше сумарний шлях перевищить 60 км?</p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                
+                let totalDistance = 0
+                let condition1 = false, condition2 = false, condition3 = false
+
+                for(let distance = 10, day = 1; ; distance *=1.1, day++) {
+                    log(`День - ${day}, пробіг за день ${distance.toFixed(2)} км`)
+                    totalDistance += distance
+                    if(day === 7) {
+                        log(`За 7 днів спртсмен пробіг ${totalDistance.toFixed(2)} км`)
+                        condition1 = true
+                    }
+                    if(distance > 20 && !condition2) { 
+                        log(`У ${day} день спортсмен вперше пробіжить понад 20 км (${distance.toFixed(2)} км)`)
+                        condition2 = true
+                    }
+                    if(totalDistance > 60 && !condition3) {
+                        log(`У ${day} день сумарний шлях вперше перевищить 60 км (${totalDistance.toFixed(2)} км)`)
+                        condition3 = true
+                    }
+                    if(condition1&&condition2&&condition3)
+                        break
+                }
+
+
+
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 2 (5)</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>Зобразити рівнобедрений трикутник із символів ^. Висоту задає користувач. </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const height = parseInt(prompt("Введіть висоту трикутника", 5))
+                const lengthBase = 1 + 2 * (height-1)
+                
+                for(let line = 1; line < height; line++) {
+                    let symbolCount = 1 + 2 * (line-1)
+                    let spaceCount = (lengthBase - symbolCount)/2
+
+                    let printSpases = ""
+                    for(let space = 1; space <= spaceCount; space++) {
+                        printSpases += " "
+                    }
+
+                    let printSymbols = ""
+                    for(let symbol = 1; symbol <=symbolCount; symbol++) {
+                        printSymbols += "^"
+                    }
+                    let printString = printSpases + printSymbols + printSpases
+                    log(printString);
+                }
+
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>
