@@ -1,0 +1,59 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 4</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>Створити функцію, яка для 3 заданих чисел знаходить одночасно декілька результатів:
+                <ul>
+                    <li>кількість парних;</li>
+                    <li>кількість додатних;</li>
+                    <li>кількість більших за 100.</li>
+                </ul>
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+
+                function getData(a, b, c) {
+                    let even = 0, positive = 0, moreThan100 = 0
+                    if (a % 2 === 0) even++
+                    if (b % 2 === 0) even++
+                    if (c % 2 === 0) even++
+
+                    if (a > 0) positive++
+                    if (b > 0) positive++
+                    if (c > 0) positive++
+
+                    if (a > 100) moreThan100++
+                    if (b > 100) moreThan100++
+                    if (c > 100) moreThan100++
+                    let result = `парних - ${even}, додатніх - ${positive}, більше 100 - ${moreThan100}`
+                    return result
+                }
+
+                const a = parseFloat(prompt("Введіть перше число", 1))
+                const b = parseFloat(prompt("Введіть друге число", 2))
+                const c = parseFloat(prompt("Введіть третє число", 3))  
+
+                log(`Введені числа a=${a}, b=${b}, c=${c}`)
+                log(getData(a, b, c))
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header__container">
+                <h1>Задача 1</h1>
+            </div>
+        </header>   
+        <main class="page">
+            <div class="page__container">
+                <p>
+                    Створити функцію, яка за номером місяця повертає його назву.
+                </p>
+
+                <script src="../js/script.js"></script>
+                <script>
+                    function getMonthsName(monthsNumber) {
+                        let monthsName = "введіть коректний номер місяця (1-12)"
+                        switch(monthsNumber) {
+                            case 1:
+                                monthsName = "січень"
+                                break
+                            case 2:
+                                monthsName = "лютий"
+                                break
+                            case 3:
+                                monthsName = "березень"
+                                break
+                            case 4:
+                                monthsName = "квітень"
+                                break
+                            case 5:
+                                monthsName = "травень"
+                                break
+                            case 6:
+                                monthsName = "червень"
+                                break
+                            case 7:
+                                monthsName = "липень"
+                                break
+                            case 8:
+                                monthsName = "серпень"
+                                break
+                            case 9:
+                                monthsName = "вересень"
+                                break
+                            case 10:
+                                monthsName = "жовтень"
+                                break
+                            case 11:
+                                monthsName = "листопад"
+                                break
+                            case 12:
+                                monthsName = "грудень"
+                                break
+                        }
+                        return monthsName
+                    }
+
+                    const monthsNumber = parseInt(prompt('Введіть номер місяця', 1))
+                    let monthsName = getMonthsName(monthsNumber)
+                    log(`${monthsNumber}й місяць - це ${monthsName}`)
+
+                </script>
+            </div>
+        </main>     
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 6</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        table, tr, td {
+            border: 1px solid black;
+        }
+
+        td {
+            padding: 10px;
+            background-color: var(--bacground-color-dark);
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 6</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Створити функцію, яка створює таблицю з вказаною кількістю рядків і стовпців (таблиця заповнюється заданим фіксованим
+                повідомленням).
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const row = parseInt(prompt("Введіть кількість рядків таблиці", 2))
+                const column = parseInt(prompt("Введіть кількість колонок таблиці", 3))    
+                const message = 'Hello)'
+                
+                log(`Сформовано таблицю на ${row} рядків та ${column} колонок`)
+                document.write("<table>")
+                for (let i = 1; i <= row; i++) {
+                    document.write("<tr>")
+                        for(let j = 1; j<=column; j++) {
+                            document.write(`<td>${message}</td>`)
+                        }
+                    document.write("</tr>")
+                }
+
+                document.write("<table>")
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

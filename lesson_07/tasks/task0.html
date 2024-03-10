@@ -1,0 +1,59 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 0</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header__container">
+                <h1>Задача 0</h1>
+            </div>
+        </header>   
+        <main class="page">
+            <div class="page__container">
+                <p>
+                    Створити функцію, яка за номером місяця повертає пору року, до якої відноситься цей місяць.
+                </p>
+                
+                <script src="../js/script.js"></script>
+                <script>
+                    function getSeason(monthsNumber) {
+                        let season = "Такого місяця не існує"
+                        switch(monthsNumber) {
+                            case 12:
+                            case 1:
+                            case 2:
+                                season = "зима"
+                                break
+                            case 3:
+                            case 4:
+                            case 5:    
+                                season = "весна"
+                                break
+                            case 6:
+                            case 7:
+                            case 8:
+                                season = "літо"
+                                break
+                            case 9:
+                            case 10:
+                            case 11:
+                                season = "осінь"
+                        }
+                        return season
+                    }
+
+                    const monthsNumber=parseInt(prompt('Введіть номер місяця', 1))
+                    let season = getSeason(monthsNumber)
+                    log(`${monthsNumber}й місяць - це ${season}`)
+                    
+                </script>
+            </div>
+        </main>     
+    </div>
+</body>
+</html>

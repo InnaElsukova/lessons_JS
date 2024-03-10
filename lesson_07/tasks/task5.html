@@ -1,0 +1,54 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 5</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 5</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Створити окремі функції, які переводять:
+                <ul>
+                    <li>Сантиметри у дюйми;</li>
+                    <li>Кілограми у фунти;</li>
+                    <li>Кілометри у милі</li>
+                </ul>
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                function cmToInch (cm) {
+                    return cm / 2.54
+                }
+
+                function kgToLb (kg){
+                    return kg * 2, 205
+                }
+
+                function kmToMile (km) {
+                    return km / 1,609
+                }
+
+                const cm = parseFloat(prompt("Введіть сантиметри для переіоду в дюйми", 1))
+                const kg = parseFloat(prompt("Введіть кілограми для переводу в фунти", 2))
+                const km = parseFloat(prompt("Введіть кілометри для переводу в милі", 3))     
+                
+                log(`${cm} сантиметрів = ${cmToInch(cm).toFixed(2) } дюймів`)
+                log(`${kg} кілограм = ${kgToLb(kg).toFixed(2)} фунтів`)
+                log(`${km} кілометрів =${kmToMile(km).toFixed(2)} миль`)
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

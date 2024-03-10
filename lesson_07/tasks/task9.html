@@ -1,0 +1,45 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 9</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 9</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Дано покази температур (довільна кількість). Розробити функцію, яка дозволить підрахувати кількість від’ємних показів
+                температури.
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                function getSubzeroTemp (countTemp) {
+                    let countSubzeroTemp = 0
+                    for (let i = 1; i <= countTemp; i++) {
+                        let temperature = parseFloat(prompt(`Введіть температуру. Показник ${i} з ${countTemp}`))
+                        log(`${temperature}`)
+                        if (temperature < 0)
+                            countSubzeroTemp++
+                    }
+                    return countSubzeroTemp
+                }
+                const countTemp = parseInt(prompt('Скільки раз бажаєте ввести температуру?', 3))
+                log('Введені показники температури:')
+                let countSubzeroTemp = getSubzeroTemp(countTemp)
+                log(`Kількість від’ємних показів температури - ${countSubzeroTemp}`)
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

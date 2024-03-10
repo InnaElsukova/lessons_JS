@@ -1,0 +1,41 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 7</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 7</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Створити функцію, яка випадковим чином виводить на екран одне із 4 зображень 
+                (шляхи до зображень передаються у функцію)<br>
+                <img width="50px" src="./img/pic1.jpg" alt="pic">
+                <img width="50px" src="./img/pic2.jpg" alt="pic">
+                <img width="50px" src="./img/pic3.jpg" alt="pic">
+                <img width="50px" src="./img/pic4.jpg" alt="pic">
+            </p>
+
+            <script>
+                function showImg(path) {
+                    document.write(`<img width="500px" src=${path} alt="pic">`)
+                }
+
+                const picNumber = 1 + Math.floor(Math.random()*4)
+                let path = `./img/pic${picNumber}.jpg`
+                showImg(path)
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

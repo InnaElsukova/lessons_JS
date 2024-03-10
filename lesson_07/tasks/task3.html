@@ -1,0 +1,63 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 3</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Створити окремі функції, які для 4 чисел знаходять: <br>
+                <ul>
+                    <li>суму;</li>
+                    <li>добуток;</li>
+                    <li>середнє арифметичне;</li>
+                    <li>мінімальне значення.</li>
+                </ul>
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                function getSum(a, b, c, d) {
+                    return a + b + c + d
+                }
+
+                function getProud(a, b, c, d) {
+                    return a * b * c * d
+                }
+
+                function getAverage(a, b, c, d) {
+                    return (a + b + c + d) / 4
+                }
+
+                function getMin(a, b, c, d) {
+                    return Math.min(a, b, c, d)
+                }
+
+                const a = parseFloat(prompt("Введіть перше число",1))
+                const b = parseFloat(prompt("Введіть друге число", 2))
+                const c = parseFloat(prompt("Введіть третє число", 3))
+                const d = parseFloat(prompt("Введіть четверте число", 4))
+
+                log(`Введені числа a=${a}, b=${b}, c=${c}, d=${d}`)
+                log(`Сума ${a}+${b}+${c}+${d}=${getSum(a, b, c, d)}`)
+                log(`Добуток ${a}*${b}*${c}*${d}=${getProud(a, b, c, d)}`)
+                log(`Середнє арифметичне (${a}+${b}+${c}+${d})/4=${getAverage(a, b, c, d)}`)
+                log(`Мінімальне значення min(${a}, ${b},${c},${d})=${getMin(a, b, c, d)}`)
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

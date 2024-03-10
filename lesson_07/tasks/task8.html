@@ -1,0 +1,63 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 8</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .banner {
+            border: 3px solid red;
+            border-radius: 10px;
+            display: inline-block;
+            padding: 20px;
+        }
+
+        .banner:hover {
+            background-color: rgb(225, 244, 157);
+        }
+
+        .banner:hover a {
+            color: red;
+            text-decoration: none;
+        }
+
+        h3 {
+            text-align: center;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 8</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Створити функцію, яка виводить банер (у функцію передаються: зображення, заголовок та посилання, куди переходимо при
+                кліку на зображення (тег img повине знаходитись у середині тега a)
+            </p>
+
+            <script>
+                function showBanner (picture, header, url) {
+                    document.write('<div class="banner">')
+                    document.write(`<a target="_blank" href="${url}">`)
+                    document.write(`<h3>${header}</h3>`)
+                    document.write(`<img src="./img/${picture}" alt="banner">`)
+                    document.write('</a>')
+                    document.write('</div')
+ 
+                }
+                
+                showBanner('google.png', 'Google перекладач', 'https://translate.google.com/?hl=ru&sl=uk&tl=en&op=translate')
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>
