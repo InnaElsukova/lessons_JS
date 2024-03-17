@@ -1,0 +1,74 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 5</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 5</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Дано послідовність оцінок учня. Підрахувати кількість:
+                <ul class="subtasks">
+                    <li>двійок;</li>
+                    <li>кількість хороших оцінок (добре, відмінно);</li>
+                    <li>кількість оцінок, які нижче середнього.</li>
+                </ul>
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                function getGrades2Count(grades) {
+                    let count = 0
+                    for(let i = 0; i < grades.length; i++) 
+                        if(grades[i] === 2)
+                            count++
+                    return count
+                }
+
+                function getGoodGradesCount(grades) {
+                    let count = 0
+                    for (let i = 0; i < grades.length; i++)
+                        if (grades[i] === 4 || grades[i] === 5)
+                            count++
+                    return count
+                }
+
+                function getAverageGrade(grades) {
+                    let gradesSum = 0;
+                    for (let i = 0; i < grades.length; i++) {
+                        gradesSum += grades[i]
+                    }
+                    return gradesSum / grades.length
+                }
+
+                function getBadGradesCount(grades) {
+                    const averageGrade = getAverageGrade(grades)
+                    let count = 0
+                    for (let i = 0; i < grades.length; i++) {
+                        if(grades[i] < averageGrade)
+                            count++
+                    }
+                    return count
+                }
+
+                let grades = [5, 5, 3, 2, 4, 4]
+                log(`Оцінки учня - ${grades}`)
+                log(`Кількість двійок - ${getGrades2Count(grades) }`)
+                log(`Кількість хороших оцінок (добре, відмінно); ${getGoodGradesCount(grades) }`)
+                log(`Кількість оцінок, які нижче середнього - ${getBadGradesCount(grades)} (середня оцінка ${getAverageGrade(grades).toFixed(1)})`)
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header__container">
+                <h1>Задача 1</h1>
+            </div>
+        </header>   
+        <main class="page">
+            <div class="page__container">
+                <p>
+                    Дано масив, який містить оцінки з К предметів. Знайти середній бал і з’ясувати до якої категорії він відноситься
+                    (відмінник, двійочник (має хоча би одну двійку), хорошист (оцінки добре і відмінно), трійочник(є хоча би одна трійка)).
+                </p>
+
+                <script src="../js/script.js"></script>
+                <script>
+                    function analyzePerfomance(grades) {
+                       let studentPerfomance = [0, 0, 0, 0] // масив з кількістю оцінок по балам (2-5)
+                        for(let i = 0; i < grades.length; i++) {
+                            studentPerfomance[grades[i]-2]++ // '2' записуємо в 0й єлемент масиву, '3' -> 1й і т.д. оцінку grades[i] записуємо в grades[i]-2 елемент масиву
+                        }
+                        return studentPerfomance
+                    }
+
+                    function getAverageGrade(studentPerfomance) {
+                        let gradesSum = 0;
+                        for(let i = 0; i < studentPerfomance.length; i++) { 
+                            gradesSum += (i + 2) * studentPerfomance[i] // оцінку множимо на кількість оцінок, наприклад 2*studentPerfomance[0]
+                        }
+                        return gradesSum / studentPerfomance.length
+                    }
+
+                    function getPerfomance(studentPerfomance){
+                        let perfomance
+                        if(studentPerfomance[0] !== 0) perfomance = 'двійочник'
+                        else if (studentPerfomance[1] !== 0) perfomance = 'трійочник'
+                        else if (studentPerfomance[2] !== 0) perfomance = 'хорошист'
+                        else perfomance = 'відмінник'
+                        return perfomance
+
+                    }
+
+                    function getPerfomance2(studentPerfomance) {
+                        let perfomance, minGrade
+                        for(let i = 0; i < studentPerfomance.length; i++) {
+                            if(studentPerfomance[i] !== 0) {
+                                minGrade = i + 2
+                                break
+                            }
+                        }
+                        switch (minGrade) {
+                            case 2:
+                                perfomance = 'двійочник'
+                                break
+                            case 3:
+                                perfomance = 'трійочник'
+                                break
+                            case 4:
+                                perfomance = 'хорошист'
+                                break
+                            case 5:
+                                perfomance = 'відмінник'
+                                break
+                            default:
+                                perfomance = 'невідомо'
+                                break
+                        }
+                        return perfomance
+                    }
+
+                    let grades = [ 5, 5, 3, 2]
+                    let studentPerfomance = analyzePerfomance(grades)
+
+                    log(`Оцінки учня - ${grades}`)
+                    log(`studentPerfomance - ${studentPerfomance}`)
+
+                    log(`Середній бал - ${getAverageGrade(studentPerfomance).toFixed(1)}`)
+                    log(`Категорія учня - ${getPerfomance(studentPerfomance) }`)
+                    log(`Категорія учня (інший алгоритм) - ${getPerfomance2(studentPerfomance)}`)
+                </script>
+            </div>
+        </main>     
+    </div>
+</body>
+</html>

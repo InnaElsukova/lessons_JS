@@ -1,0 +1,67 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 4</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>Дано послідовність номерів автомобілів. Підрахувати кількість номерів, які :
+                <ul class="subtasks">
+                    <li>починаються на букву «А»;</li>
+                    <li>перша і остання літери співпадають;</li>
+                    <li>складаються з більше ніш 5 символів;</li>
+                </ul>
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+
+                function getStartA (autoNumbers) {
+                    let countFirstA = 0
+                    for(let i = 0; i < autoNumbers.length; i++) {
+                        if(autoNumbers[i].charCodeAt(0) === 65)
+                            countFirstA++
+                    }
+                    return countFirstA
+                }
+
+                function getSameLettersCount(autoNumbers) {
+                    let countSameLetters = 0
+                    for (let i = 0; i < autoNumbers.length; i++) {
+                        if (autoNumbers[i].charCodeAt(0) === autoNumbers[i].charCodeAt(autoNumbers[i].length-1))
+                            countSameLetters++
+                    }
+                    return countSameLetters                   
+                }
+
+                function getShortNumber(autoNumbers) {
+                    let countShort = 0
+                    for (let i = 0; i < autoNumbers.length; i++) {
+                        if (autoNumbers[i].length >= 5)
+                            countShort++
+                    }
+                    return countShort
+                }
+
+                let autoNumbers = ['AA1234BB', 'BH1551BB', 'AH2222AA', 'CH1462KA', 'AA4444BB', 'AA12',]
+                log(`Дано послідовність номерів автомобілів: ${autoNumbers}`)
+                log(`Кількість номерів, що починаються на букву «А» - ${getStartA(autoNumbers) }`)
+                log(`Кількість номерів, де перша і остання літери співпадають - ${getSameLettersCount(autoNumbers)}`)
+                log(`Кількість номерів, що складаються з більше ніш 5 символів - ${getShortNumber(autoNumbers) }`)
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 6</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        table, tr, td {
+            border: 1px solid black;
+        }
+
+        td {
+            padding: 10px;
+            background-color: var(--bacground-color-dark);
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 6</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Дано послідовність цін товарів та назв (у окремих масивах). Вивести на екран ті, які може собі дозволити користувач
+                (кількість грошей задається).
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                function getAvalibleProducts(productsPrices, productsTitles, money) {
+                    let avalibleProducts = []
+                    for(let i = 0; i< productsPrices.length; i++ )
+                        if(productsPrices[i]<=money)
+                            avalibleProducts.push(`${productsTitles[i]} за ${productsPrices[i]} грн`)
+                    return avalibleProducts
+                }
+
+                let productsPrices = [200, 20, 310, 350, 280, 10, 50]
+                let productsTitles = ['сало', 'цибуля', 'сир', 'ковбаса', 'риба', 'вода', 'сік']
+                const money = parseFloat(prompt("Введіть кількість грошей", 100))
+                log('Асортимент товарів:')
+                for (let i = 0; i < productsPrices.length; i++) 
+                    log(`- ${productsTitles[i]}, ${productsPrices[i]} грн`)
+                log('')
+                let avalibleProducts = getAvalibleProducts(productsPrices, productsTitles, money)
+                log(`У Вас ${money} грн, можете собі дозволити:`)
+                if(avalibleProducts.length > 0)
+                    for(let i = 0; i < avalibleProducts.length; i++)
+                        log(avalibleProducts[i])
+                else
+                    log('На жаль у Вас не вистачить грошей на жоден з товарів')
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

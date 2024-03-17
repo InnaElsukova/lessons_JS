@@ -1,0 +1,89 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 7</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 7</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Дано послідовність платіжок протягом року. Знайти сумарну кількість грошей за:
+                <ul class="subtasks">
+                    <li>за весь рік;;</li>
+                    <li>у першій половині року;</li>
+                    <li>у другій половині року;</li>
+                    <li>за літо;</li>
+                    <li>за ІІ квартал;</li>
+                    <li>за парні місяці (з парними номерами);</li>
+                    <li>за місяці, які є початковими у сезоні (весна, літо, осінь, зима).</li>
+                </ul>
+            </p>
+
+            <script src="../js/script.js"></script>
+            <script>
+                
+                // формуємо масив, який містить місяці для розрахунку (з firstMonth - по lastMonth)
+                function getMonthesForPeriod(firstMonth, lastMonth) {
+                    let monthes = []
+                    for(let month = firstMonth; month<=lastMonth; month++) {
+                        monthes.push(month)
+                    }
+                    return monthes
+                }
+
+                function getMonthesEven() { // 2, 4, 6, ...., 12
+                        let monthes = []
+                        for (let month = 2; month <= 12; month += 2) {
+                            monthes.push(month)
+                        }
+                        return monthes
+                }
+
+                function getMonthesFirstInSeason() { // 3, 6, 9, 12
+                        let monthes = []
+                        for (let month = 3; month <= 12; month += 3) {
+                            monthes.push(month)
+                        }
+                        return monthes
+                }
+
+                // розраховуємо суму платежів за місяці, які містяться в масиві monthes
+                function getPaymentsForPeriod(payments, monthes) {
+                    let sumPayments = 0
+                    for (let i = 0; i < monthes.length; i++) {
+                        console.log(`i - ${i}`)
+                        console.log(`monthes[i] - ${monthes[i]}`)
+                        console.log(`payments[monthes[i]] - ${payments[monthes[i]]}`)
+                        sumPayments += payments[monthes[i]-1]
+                    }
+                    return sumPayments
+                }
+
+                let payments = [12, 22, 45, 9, 76, 138, 45, 59, 78, 99, 111, 198]
+                log(`Послідовність платіжок протягом року (січень - грудень) - ${payments}`)
+                log('Сумарна кількість грошей:')
+                log(`- за весь рік - ${getPaymentsForPeriod(payments, getMonthesForPeriod(1, 12))} грн`)
+                log(` ${getMonthesFirstInSeason()}`)
+                log(`- у першій половині року - ${getPaymentsForPeriod(payments, getMonthesForPeriod(1, 6))} грн`)
+                log(`- у другій половині року - ${getPaymentsForPeriod(payments, getMonthesForPeriod(7, 12))} грн`)
+                log(`- за літо - ${getPaymentsForPeriod(payments, getMonthesForPeriod(6, 8))} грн`)
+                log(`- за ІІ квартал - ${getPaymentsForPeriod(payments, getMonthesForPeriod(4, 6))} грн`)
+                log(`- >за парні місяці (з парними номерами) - ${getPaymentsForPeriod(payments, getMonthesEven())} грн`)
+                log(`- за місяці, які є початковими у сезоні (весна, літо, осінь, зима) - ${getPaymentsForPeriod(payments, getMonthesFirstInSeason())} грн`)
+                
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

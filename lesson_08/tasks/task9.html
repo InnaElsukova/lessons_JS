@@ -1,0 +1,120 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 9</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+    
+        td {
+            width: 40px;
+            height: 40px;
+            background-color: rgb(137, 198, 255);
+        }
+
+        .hits {
+            background-color: rgb(248, 158, 158);
+        }
+
+        td img {
+            width: 38px;
+        }
+    
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 9</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Морський бій. Користувач вводить кількість клітинок одновимірного масиву та кількість одиночних кораблів. Комп’ютер
+                довільно розміщує ці одиночні кораблі у масиві по один у клітинці (якщо у клітинці 0, то клітинка пуста, якщо 1 – то це
+                означає, що там є корабель. Користувач вводить номер клітинки, куди стріляє. Гра продовжується до тих пір, поки не
+                будуть потоплені усі кораблі.
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+
+                function placementShip(countFields, countShips) {
+                    let shipPlacement = []
+                    for (let i = 0; i < countFields; i++) {
+                        shipPlacement.push(0)
+                    }
+                    for(let i = 0; i < countShips; ) {
+                        const randPlace = Math.floor(Math.random()*(countFields)) // рандомний номер клітинки 0 - countFields-1
+                        if(shipPlacement[randPlace] === 0) { // перевірка чи не розміщено в цій ячейці корабель (0-не розміщено)
+                            shipPlacement[randPlace] = 1
+                            i++ // робимо інкремент тільки в тому разі, коли розміщуємо корабель
+                        }
+                    }
+                    return shipPlacement
+                }
+
+                let countFields, countShips // не константа, бо можливо вводити зачення декілька разів
+                do {
+                    countFields = parseInt(prompt('Введіть кількість клітинок', 10))
+                    countShips = parseInt(prompt('Введіть кількість кораблів', 3))
+                    if(countShips > countFields)
+                        alert('Кількість кораблів має бути не більша за кількість клітинок')
+                } while (countShips > countFields)
+                
+                let shipPlacement = placementShip(countFields, countShips) 
+
+                let shots = [] // облік зроблених пострілів
+                for (let i = 0; i < countFields; i++) {
+                    shots.push(0)
+                }
+                
+                let shot
+                let numberOfHits
+                do{
+                    shot = parseInt(prompt(`Введіть точку для пострілу (1-${countFields})`)) - 1 //ячейки рахуємо з 1, ел-ти масиву з 0
+                    if (shot >= 0 && shot <= countFields-1) {
+                        shots[shot] = 1 // записуємо 1 в ячейку, куди було зроблено постріл
+                        if (shots[shot] === shipPlacement[shot])
+                            alert('Влучили!')
+                        else
+                            alert('Промах(')
+                    }
+                    else
+                        alert('Число має бути від 1 до 10')
+                    
+                    numberOfHits = 0
+                    for(let i = 0; i < countFields; i++) {
+                        if(shipPlacement[i] && shots[i])
+                            numberOfHits++
+                    }
+
+                }   while(numberOfHits != countShips)             
+                
+                   
+
+                document.write('<table>')
+                document.write('<tr>')
+                    for(let i = 0; i < countFields; i++) {
+                        if(shots[i])
+                            document.write('<td class="hits">')
+                        else
+                            document.write('<td>')
+                        if (shipPlacement[i] === 1)
+                            document.write('<img src="./img/ship.svg" alt="ship">')
+                        document.write('</td>')
+                    }
+                        
+                document.write('</tr>')
+                document.write('</table>')
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

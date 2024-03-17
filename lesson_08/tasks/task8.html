@@ -1,0 +1,64 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 8</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 8</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Дано одновимірний масив, у якому зберігається певна виграшна сума (елементи заповнюються випадковим чином значеннями від
+                -500 до 500). Надаючи користувачу можливість вибирати номери елементів (поки він не відмовиться). Знаходити сумарний
+                виграш.
+            </p>
+
+            <script src="../js/script.js"></script>
+            <script>
+
+                function generateRandomArray (minValue, maxValue, arraySize) {
+                    let winnings = []
+                    for(let i = 0; i < arraySize; i++) {
+                        const rand = minValue + Math.floor(Math.random()*(maxValue - minValue + 1))
+                        winnings.push(rand)
+                    }
+                    return winnings
+                }
+
+                const arraySize = 10
+                winnings = generateRandomArray(-500, 500, arraySize)
+                log(`Розмір масиву - ${arraySize} елементів`)                
+                log(`Згенеровано масив:  ${winnings}`)                
+
+                let numElement, enteredNums = ""
+                let winSum = 0
+                let nextTry
+                do {
+                    numElement = parseInt(prompt(`Виберіть номер елемента від 1 до ${arraySize}. Введені номери: ${enteredNums}`))
+                    enteredNums += numElement + ' '
+                    if(winnings[numElement - 1] !== 1000) {
+                        winSum += winnings[numElement - 1]
+                        winnings[numElement - 1] = 1000 // після того, як врахували обраний ел-т, записуємо на його місце 1000 для перевірки того, щоб не врахувати його двічі
+                    }
+                    else
+                        alert(`Будьте уважніше, елемент №${numElement} вже враховано`)
+                        
+                    nextTry = confirm('Бажаєте обрати ще елемент?')
+                } while (nextTry)
+                log(`Ваш виграш: ${winSum}`)   
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>
