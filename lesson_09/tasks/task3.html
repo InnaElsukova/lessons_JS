@@ -1,0 +1,41 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 3</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Користувач вводить кількість елементів. Створити масив, у якому перші 5 елементів заповнені 1-цями, а інші до кінця
+                масиву заповнені 7-ками.
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                    const itemsCount = parseInt(prompt('Введіть кількість елементів масиву',8))
+                    let halfArr = new Array(itemsCount)
+
+                    halfArr.fill(1, 0, 6)
+                    halfArr.fill(7, 6)
+
+                    log(`Задана кількіть елементів масиву: ${itemsCount}`)
+                    log(`Масив з ${itemsCount} елементів, перші 5 елементів заповнені 1-цями, а інші до кінця масиву заповнені 7-ками.- 
+                    ${halfArr}`)
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

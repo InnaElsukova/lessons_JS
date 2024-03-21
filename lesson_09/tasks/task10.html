@@ -1,0 +1,38 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 10</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 10</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Дано масив цін у грн. Податок складає 20%. Сформувати масив, який буде містити величину сплаченого податку у грн.
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const prices = [200, 100, 5, 328, 8, 425.55, 40, 147]
+                const tax = 20
+
+                const paidTaxes = prices.map(price => price * tax / 100)
+
+                log(`Масив цін  - ${prices}`)
+                log(`Масив з величиною сплаченого податку (${tax}%) у грн - ${paidTaxes}`)
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header__container">
+                <h1>Задача 1</h1>
+            </div>
+        </header>   
+        <main class="page">
+            <div class="page__container">
+                <p>
+                    Користувач вводить кількість елементів. Створити масив, що складається з вказаної кількості елементів заповнених нулями.
+                </p>
+
+                <script src="../js/script.js"></script>
+                <script>
+                   const itemsCount = parseInt(prompt('Введіть кількість елементів масиву', 5))
+                   const zeroArr = new Array(itemsCount).fill(0)
+
+                   log(`Задана кількіть елементів масиву: ${itemsCount}`)
+                   log(`Масив з ${itemsCount} елементів, заповнених '0' - ${zeroArr}`)
+                </script>
+            </div>
+        </main>     
+    </div>
+</body>
+</html>
