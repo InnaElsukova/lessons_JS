@@ -1,0 +1,44 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 3</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Сформувати список з тих цін, які більші за попереднє значення
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const randArray = generateRandomArray()
+
+                function getMorePrices(prices) {
+                    let morePrices = []
+                    prices.forEach((price, index) => {
+                        if (index === 0 || price > prices[index-1])
+                            morePrices.push(price)
+                    })
+                    return morePrices
+                }
+
+                log(`Ціни на цінні папери:                 ${randArray}`)
+                log(`Список ел-тів, більших за попередній: ${getMorePrices(randArray)}`)    
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

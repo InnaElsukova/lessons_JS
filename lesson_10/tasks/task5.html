@@ -1,0 +1,42 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 5</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 5</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Підрахувати кількість змін цін
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const randArray = generateRandomArray(1, 10000, 15) // min, max, count
+
+                function getPriceChangesCount(prices) {
+                    const priceChangesCount = prices.reduce(
+                        (count, price, index) => (index !==0 && price !== prices[index-1] ? count + 1 : count),
+                        0
+                    )
+                    return priceChangesCount
+                }
+                
+                log(`Ціни на цінні папери:     ${randArray}`)
+                log(`Кількість змін цін -      ${getPriceChangesCount(randArray)}`) 
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

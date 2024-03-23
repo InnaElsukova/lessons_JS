@@ -1,0 +1,41 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 6</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 6</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Визначити, чи є ціна, що менше 1000
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const randArray = generateRandomArray() 
+
+                function presentPriceLess1000(prices) {
+                    const presentLess1000 = prices.some(price => price <1000)
+                    return presentLess1000
+                }
+
+                let message = presentPriceLess1000(randArray) ? 'Так, в масиві є ціна, менша 1000' : 'Ні, в масиві немає ціни, меншої 1000'
+
+                log(`Ціни на цінні папери:     ${randArray}`)
+                log(message) 
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

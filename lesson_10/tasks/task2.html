@@ -1,0 +1,44 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 2</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Дано історію цін на цінні папери за деякий період (згенерувати від 1 до 10000)
+                Сформувати новий масив, у якому є номери тільки тих, що більші за 1000 грн.
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const randArray = generateRandomArray()
+
+                function getMore1000Index(prices) {
+                    let more1000Indexes = []
+                    prices.forEach((element, index) => {
+                        if(element > 1000)
+                            more1000Indexes.push(index)
+                    })
+                    return more1000Indexes
+                }
+              
+                log(`Ціни на цінні папери:     ${randArray}`)
+                log(`індекс ел-тів, більших за 1000 грн: ${getMore1000Index(randArray)}`)                
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

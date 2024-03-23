@@ -1,0 +1,41 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 8</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 8</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Підрахувати кількість цін, що більше за 1000
+            </p>
+
+            <script src="../js/script.js"></script>
+            <script>
+                const randArray = generateRandomArray()
+
+                function getCountPricesMore1000(prices) {
+                    const countPricesMore1000 = prices.reduce(
+                       (count, price, index) => (price > 1000 ? count+1 : count), 0
+                    )
+                    return countPricesMore1000
+                }
+
+                log(`Ціни на цінні папери:          ${randArray}`)
+                log(`Кількість цін, що більше 1000: ${getCountPricesMore1000(randArray)}`) 
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

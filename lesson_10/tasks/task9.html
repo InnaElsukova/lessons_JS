@@ -1,0 +1,40 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 9</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 9</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Підрахувати суму цін, що більше за 1000
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const randArray = generateRandomArray()
+
+                function getSumPriceMore1000(prices) {
+                    const sumPriceMore1000 = prices.reduce(
+                        (sum, price) => (price > 1000 ? sum + price : sum), 0
+                    )
+                    return sumPriceMore1000
+                }
+                log(`Ціни на цінні папери:     ${randArray}`)
+                log(`Сума цін, що більше 1000: ${getSumPriceMore1000(randArray)}`)                 
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

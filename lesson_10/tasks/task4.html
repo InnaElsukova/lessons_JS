@@ -1,0 +1,47 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 4</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Сформувати новий масив, що міститиме значення цін у відсотках стосовно максимального
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const randArray = generateRandomArray()
+
+                function getMaxPrice(prices) {
+                    const maxPrice = Math.max(...prices)
+                    return maxPrice
+                }
+
+                function getPersentPrices(prices, maxPrice) {
+                    const persentPrices = prices.map( price =>  Math.round(price / maxPrice * 10000) / 100 )
+                    return persentPrices
+                }
+
+                let maxPrice = getMaxPrice(randArray)
+                log(`Ціни на цінні папери:                    ${randArray}`)
+                log(`Максимальна ціна:                        ${maxPrice}`)
+                log(`Ціни у відсотках стосовно максимального: ${getPersentPrices(randArray, maxPrice)}`) 
+            
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

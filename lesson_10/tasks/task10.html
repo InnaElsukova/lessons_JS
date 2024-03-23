@@ -1,0 +1,40 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 10</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 10</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Знайти першу ціну, що більше за 1000
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const randArray = generateRandomArray()
+
+                function getFirstPriceMore1000(prices) {
+                    const priceMore1000 = prices.find(
+                        price => price > 1000
+                    )
+                    return priceMore1000
+                }
+                log(`Ціни на цінні папери:       ${randArray}`)
+                log(`Перша ціна, що більше 1000: ${getFirstPriceMore1000(randArray)}`)
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>
