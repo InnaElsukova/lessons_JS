@@ -1,0 +1,108 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 3</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Морський бій. Випадковим чином на двовимірному полі розміром 6*6 розташовується 5 кораблів. Користувач стріляє вказуючи
+                координати. Гра продовжується поки не потоплено усі кораблі або у користувача не закінчаться снаряди.
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const columns = 6
+                const rows = 6
+                const ships = 5
+                const hits = 10
+                 
+                function placementShip(count = 5, c, r) {
+                    let shipPlacement = []
+                    for (let r = 0; r < rows; r++) {
+                        let arrRowZero = new Array(6).fill(0)
+                        shipPlacement.push(arrRowZero)
+                    }
+                    for(let ship = 1; ship <= count; ) {
+                        let columnPos = Math.floor(Math.random() * 6)
+                        let rowPos = Math.floor(Math.random() * 6)
+                        if(shipPlacement[rowPos][columnPos] === 0) {
+                            shipPlacement[rowPos][columnPos] = 1
+                            ship++
+                        }
+                    }
+                    return shipPlacement
+                }
+    
+                let shipPlacement = placementShip(ships, columns, rows)
+                console.log(shipPlacement)
+
+
+                let hitNum = 1
+                let shipsCrashed = 0
+                do {
+                    let hitR = parseInt(prompt(`Постріл ${hitNum}/${hits} ведіть рядок`, 1)) - 1
+                    let hitC = parseInt(prompt(`Постріл ${hitNum}/${hits} ведіть колонку`, 1)) - 1
+                    hitNum++
+                    switch(shipPlacement[hitR][hitC]) {
+                        case 0:
+                            alert('Промах(')
+                            shipPlacement[hitR][hitC] = 2
+                            break
+                        case 1:
+                            alert('Влучили!')
+                            shipPlacement[hitR][hitC] = 10
+                            shipsCrashed++
+                            break
+                        case 2:
+                        case 10:
+                            alert('Уважніше. Сюди вже стріляли!')
+                            break                        
+                    }
+
+                } while(hitNum <= hits && shipsCrashed < ships)
+              
+
+                document.write('<table>')
+                for(let row = 0; row < rows; row++) {
+                    document.write('<tr>')
+                        for(let col = 0; col < columns; col++) {
+                            switch(shipPlacement[row][col]) {
+                                case 0:
+                                    document.write('<td class="sea">')
+                                    break
+                                case 1:
+                                    document.write('<td class="sea">')
+                                    document.write('<img src="./img/ship.svg" alt="ship">')
+                                    break
+                                case 2:
+                                    document.write('<td class="sea hits">')
+                                    break
+                                case 10:
+                                    document.write('<td class="sea hits">')
+                                    document.write('<img src="./img/ship.svg" alt="ship">')
+                                    break                                                                                                            
+                            }
+                            document.write('</td>')
+                        }
+                    document.write('</tr>')
+                }
+                document.write('</table>')
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

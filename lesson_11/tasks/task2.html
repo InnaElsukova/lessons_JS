@@ -1,0 +1,140 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 2</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Дано інформацію про прибуток К магазинів протягом тижня. Знайти :
+                <ol class="subtasks">
+                    <li>загальний прибуток кожного масиву за тиждень;</li>
+                    <li>загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за вівторок, і т.д.);
+                    </li>
+                    <li>загальний прибуток за робочі дні</li>
+                    <li>загальний прибуток за вихідні дні</li>
+                    <li>максимальний прибуток за середу</li>
+                    <li>сформувати загальний список (одновимірний масив) зі значенням, які що більші за 200</li>
+                    <li>відсортувати кожен тиждень за зростанням</li>
+                    <li>відсортувати тижні (рядки) за спаданням максимального елементи у цьому тижні (рядку), тобто при порівнянні
+                        рядків
+                        потрібно порівнювати максимальні елементи у кожному з цих рядків</li>
+                    <li>упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто при порівнянні двох рядків треба знайти
+                        суму
+                        кожного з рядків і порівнювати ці суми, на основі цих сум буде зрозуміло, який з елементів повинен іти раніше).
+                    </li>
+                </ol>
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const profit = generateRandom2dArray (4, 7, 10, 300)
+
+                function print2dArray(arr) {
+                    arr.forEach(row => log(row))
+                }
+
+                log('Згенеровано прибуток 4 магазинів протягом тижня ')
+                print2dArray(profit)
+                
+                // 1. загальний прибуток кожного масиву за тиждень;</li >
+                //const profit1 = profit.forEach(shopProfit => shopProfit.reduce((sum, item) => sum + item));
+                const profit1 = profit.map((shopProfit) => shopProfit.reduce( (sum, item) => sum+item) );
+                log(`1. загальний прибуток кожного магазину за тиждень:                 ${profit1}`)
+
+                // 2 .загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за вівторок, і т.д.);
+                const profitLine = profit.flat()
+                let profitWeek = new Array(7)
+                profitWeek.fill(0)
+                profitLine.reduce((dontUse, item, index, baseArr) => profitWeek[index % 7] += item, 0)
+                log(`2. загальний прибуток усіх магазинів по дням:                      ${profitWeek}`)
+
+                profitWeek.fill(0)
+                for(let i = 0; i <profitLine.length; i++)
+                    profitWeek[i % 7] += profitLine[i]
+                log(`2.1 загальний прибуток усіх магазинів по дням (інший алгоритм):    ${profitWeek}`)
+               
+                // 3. загальний прибуток за робочі дні
+                let sum3 = 0
+                for(let i = 0; i < profitLine.length; i++) 
+                    if(i % 7 !== 5 && i % 7 !== 6) 
+                        sum3 += profitLine[i]
+                log(`3. загальний прибуток прибуток за робочі дні:                      ${sum3}`)
+
+                // 4. загальний прибуток за вихідні дні
+                let sum4 = 0
+                for (let i = 0; i < profitLine.length; i++)
+                    if (i % 7 === 5 || i % 7 === 6)
+                        sum4 += profitLine[i]
+                log(`4. загальний прибуток прибуток за вихідні дні:                     ${sum4}`)
+
+                // 5. максимальний прибуток за середу
+                let maxWednesdayProfit = 0
+                for(let i = 0; i < profitLine.length; i++) 
+                    if(i % 7 === 2)
+                        if(profitLine[i] > maxWednesdayProfit)
+                            maxWednesdayProfit = profitLine[i]
+                log(`5. максимальний прибуток за середу:                                ${maxWednesdayProfit}`)
+
+                // 6. сформувати загальний список (одновимірний масив) зі значенням, які що більші за 200
+                let profitMore200 = profitLine.filter(item => item > 200)
+                log(`6. список (одновимірний масив) зі значенням, які що більші за 200: ${profitMore200}`)
+                log('') 
+
+                // 7. відсортувати кожен тиждень за зростанням
+                let profitSortedIncrease = profit.map((element) => [...element])
+                profitSortedIncrease.forEach((weekProfit, index, baseArr) => baseArr[index].sort((a, b) => a - b) )
+                log(`7. відсортувати кожен тиждень за зростанням:                  `)
+                print2dArray(profitSortedIncrease)
+                log('')
+
+                // 8. відсортувати тижні (рядки) за спаданням максимального елементи у цьому тижні (рядку), тобто при порівнянні
+                //        рядків потрібно порівнювати максимальні елементи у кожному з цих рядків
+                let profitSortedMaxDecrease =  profit.map((element) => [...element])
+                
+                function sortMaxDecrease(item1, item2) {
+                    const item1Max = Math.max(...item1)
+                    const item2Max = Math.max(...item2)
+                    return item2Max - item1Max
+                }
+
+                profitSortedMaxDecrease.sort(sortMaxDecrease)
+                log(`8. відсортувати тижні за спаданням максимального елементу у цьому тижні:`)
+                print2dArray(profitSortedMaxDecrease) 
+                log('')
+
+                // 9. упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто при порівнянні двох рядків треба знайти
+                //        суму кожного з рядків і порівнювати ці суми, на основі цих сум буде зрозуміло, який з елементів повинен іти раніше).
+
+                let profitSortedSumDecrease = profit.map((element) => [...element])
+
+                function sortSumDecrease(item1, item2) {
+                    const item1Sum = item1.reduce((sum, item) => sum + item)
+                    console.log(item1)
+                    console.log(item1Sum)
+                    const item2Sum = item2.reduce((sum, item) => sum + item)
+                    return item2Sum - item1Sum
+                }
+                profitSortedSumDecrease.sort(sortSumDecrease)
+                log(`9. відсортувати тижні за спаданням суми елементів у рядку:`)
+                print2dArray(profitSortedSumDecrease)
+
+
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html

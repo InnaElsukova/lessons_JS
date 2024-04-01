@@ -1,0 +1,106 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header__container">
+                <h1>Задача 1</h1>
+            </div>
+        </header>   
+        <main class="page">
+            <div class="page__container">
+                <p>
+                    Знайти суми елементів у вказаній області
+                    <ol class="subtasks">
+                        <li>номери рядків від 0 до половини, стовпці від 0 до половини</li>
+                        <li>номери рядків від 0 до половини, стовпці від половини до кінця</li>
+                        <li>номери рядків (від половини до кінця, стовпці від 0 до половини)</li>
+                        <li>номери рядків від половини до кінця , стовпці від половини до кінця</li>
+                        <li>Суму парних рядків</li>
+                        <li>Суму непарних стовпців</li>
+                        <li>У парних рядках – непарні стовпці, у непарних – парні</li>
+                    </ol>
+                </p>
+
+                <script src="../js/script.js"></script>
+                <script>
+                    const rand2dArray = generateRandom2dArray()
+                    log('Згенеровано двовимірний масив (за замовчанням 6х6)')
+                    rand2dArray.forEach(row => log(row));                    
+                    
+                    // 1 омери рядків від 0 до половини, стовпці від 0 до половини
+                    let sum1 = 0
+                    for (let row = 0; row < rand2dArray.length / 2; row++)
+                        for(let col = 0; col < rand2dArray[row].length / 2; col++)
+                            sum1 += rand2dArray[row][col]
+                    log(`1. Сума ел-тів (номери рядків від 0 до половини, стовпці від 0 до половини):            ${sum1}`)
+
+                    // 2 номери рядків від 0 до половини, стовпці від половини до кінця
+                    function cutArray(srartRow, endRow, startCol, endCol, arr) {
+                        let cutArr = arr.slice(srartRow,endRow)
+                        cutArr.forEach(
+                            (el, index, baseArr) => baseArr[index] = el.slice(startCol, endCol)
+                        )
+                        return cutArr
+                    } 
+
+                    function getSum2dArray(arr2d) {
+                        const arr1d = arr2d.flat()
+                        return arr1d.reduce((sum, el) => sum + el)
+                    }
+                    const cutArr = cutArray(0, rand2dArray.length / 2, rand2dArray[0].length / 2, rand2dArray[0].length,rand2dArray)
+                    const sum2 = getSum2dArray(cutArr)
+                    log(`2. Сума ел-тів (номери рядків від 0 до половини, стовпці від половини до кінця):        ${sum2}`)
+
+                    // 3 номери рядків (від половини до кінця, стовпці від 0 до половини)
+                    const cutRowArray = rand2dArray.filter((row, index, baseArr) => index >= baseArr.length / 2)
+                    cutRowArray.forEach((row, index, baseArr) => {
+                        baseArr[index] = row.slice(0, row.length / 2)
+                    } )
+                    let sum3 = getSum2dArray(cutRowArray)
+                    log(`3. Сума ел-тів (номери рядків від від половини до кінця,стовпці від 0 до половини):     ${sum3}`)
+
+                    // 4 номери рядків від половини до кінця , стовпці від половини до кінця
+                    const cutArr2 = cutArray(rand2dArray.length / 2, rand2dArray.length, rand2dArray[0].length / 2, rand2dArray[0].length, rand2dArray)
+                    const sum4 = getSum2dArray(cutArr2)
+                    log(`4. Сума ел-тів (номери рядків від від половини до кінця,стовпці від половини до кінця): ${sum4}`)
+
+                    // 5 Суму парних рядків
+                    let sum5 = 0
+                    for(let row = 1; row < rand2dArray.length; row +=2) 
+                        sum5 += rand2dArray[row].reduce((sum, item) => sum + item)
+                    log(`5. Сума парних рядків 2, 4, ... (т.я. нумерація з 0, рахуємо 1(2), 3(4), ...):          ${sum5}`)
+
+                    //6 Суму непарних стовпців
+                    let sum6 = 0
+                    for(let row of rand2dArray) 
+                        sum6 += row.reduce((sum, item, index) => index % 2 === 0 ? sum + item : sum)
+                    log(`6. Сума непарних стовпців 1, 3, ... (т.я. нумерація з 0, рахуємо 0(1), 2(3), ...):      ${sum6}`)
+
+                    //7 У парних рядках – непарні стовпці, у непарних – парні
+                    let sum7 = 0
+                    sum7 = rand2dArray.reduce((rowSum, row, index, baseArr) => 
+                        index % 2 === 0 ? 
+                            rowSum + row.reduce((sum, item, index) => index % 2 === 1 ? sum + item : sum, 0) :  // непарний рядок парні ел-ти
+                            rowSum + row.reduce((sum, item, index) => index % 2 === 0 ? sum + item : sum, 0) 
+                    , 0)
+                    log(`7. Сума y парних рядках – непарні стовпці, у непарних – парні:                          ${sum7}`)
+
+                    const arr1d = rand2dArray.flat()
+                    let sum71 = 0
+                    for(let i = 1; i <= arr1d.length; i +=2)
+                        sum71 += arr1d[i]
+                    log(`7.1 Сума y парних рядках – непарні стовпці, у непарних – парні (інший алгоритм):        ${sum7}`)
+
+                </script>
+            </div>
+        </main>     
+    </div>
+</body>
+</html>
