@@ -1,0 +1,71 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 2</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів та порівнянь чисел під час сортування
+                змішуванням.
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const randArray = generateRandomArray(1, 100, 30)
+                log(`Згенеровано масив 30 чисел:    ${randArray}`)
+                let changeCount = 0
+                let iteration = 0
+                let compares = 0
+
+                let leftIndex = 0
+                let rightIndex = randArray.length-1 
+
+
+                while(leftIndex < rightIndex) {
+                    for(let i = leftIndex; i <= rightIndex; i++) {
+                        compares++
+                        if(randArray[i] < randArray[i-1]) {
+                            let temp = randArray[i]
+                            randArray[i] = randArray[i - 1]
+                            randArray[i - 1] = temp
+                            changeCount++
+                        }
+                    }
+                    rightIndex--
+
+                    for(let i = rightIndex; i >leftIndex; i--) {
+                        compares++
+                        if (randArray[i] < randArray[i - 1]) {
+                            let temp = randArray[i]
+                            randArray[i] = randArray[i - 1]
+                            randArray[i - 1] = temp
+                            changeCount++
+                        }   
+                    }
+                    leftIndex++
+                    iteration++
+                }
+
+                log('Кількість:')
+                log(`- ітерацій           : ${iteration}`)
+                log(`- порівнянь          : ${compares}`)
+                log(`- перестановок ел-тів: ${changeCount}`)
+                log(`Масив відсортований змішуванням: ${randArray}`)
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

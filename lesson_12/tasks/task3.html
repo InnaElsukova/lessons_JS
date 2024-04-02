@@ -1,0 +1,54 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 3</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів та порівнянь чисел під час сортування
+                включеннями.
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                    const randArray = generateRandomArray(1, 100, 30)
+                    log(`Згенеровано масив 30 чисел:     ${randArray}`)
+                    let changeCount = 0
+                    let compares = 0
+
+                    let key, j
+                    for(let i = 1; i < randArray.length; i++) {
+                        key = randArray[i]
+                        j = i-1
+                        while(j >= 0 && randArray[j] > key) {
+                            randArray[j+1] = randArray[j]
+                            compares++
+                            j -= 1   
+                        }
+                        randArray[j+1] = key
+                        changeCount++                        
+                    }
+
+                    log('Кількість:')
+                    log(`- порівнянь          : ${compares}`)
+                    log(`- перестановок ел-тів: ${changeCount}`)
+                    log(`Масив відсортований включеннями: ${randArray}`)  
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

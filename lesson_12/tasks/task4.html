@@ -1,0 +1,135 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 4</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Для розглянутих методів сортування спробувати вивести етапи сортування шляхом виведення відповідних таблиць за зразком .
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const randArray = generateRandomArray(1, 10, 5)
+                
+                // Bubble sort
+                const arrBubleSort = [...randArray]
+                log('Згенеровано масив:     ')
+                log(randArray)
+                log('-----------')
+                let changes = false
+                let changeCount = 0
+                let iteration = 1
+                let compares = 0
+                do {
+                    changes = false
+                    for (let i = 1; i < arrBubleSort.length; i++) {
+                        compares++
+                        if (arrBubleSort[i] < arrBubleSort[i - 1]) {
+                            let temp = arrBubleSort[i]
+                            arrBubleSort[i] = arrBubleSort[i - 1]
+                            arrBubleSort[i - 1] = temp
+                            changes = true
+                            changeCount++
+                            log(arrBubleSort)
+                        }
+                    }
+                    iteration++
+                } while (changes)
+                log('Сортування бульбашкою. Кількість:')
+                log(`- ітерацій           : ${iteration}`)
+                log(`- порівнянь          : ${compares}`)
+                log(`- перестановок ел-тів: ${changeCount}`)
+                log('')
+
+                // Cocktail sort
+                const arrCocktailSort = [...randArray] 
+                log('Згенеровано масив:     ')
+                log(randArray)
+                log('-----------')
+                changeCount = 0
+                iteration = 0
+                compares = 0
+
+                let leftIndex = 0
+                let rightIndex = arrCocktailSort.length - 1
+
+                while (leftIndex < rightIndex) {
+                    for (let i = leftIndex; i <= rightIndex; i++) {
+                        compares++
+                        if (arrCocktailSort[i] < arrCocktailSort[i - 1]) {
+                            let temp = arrCocktailSort[i]
+                            arrCocktailSort[i] = arrCocktailSort[i - 1]
+                            arrCocktailSort[i - 1] = temp
+                            log(arrCocktailSort)
+                            changeCount++
+                        }
+                    }
+                    rightIndex--
+
+                    for (let i = rightIndex; i > leftIndex; i--) {
+                        compares++
+                        if (arrCocktailSort[i] < arrCocktailSort[i - 1]) {
+                            let temp = arrCocktailSort[i]
+                            arrCocktailSort[i] = arrCocktailSort[i - 1]
+                            arrCocktailSort[i - 1] = temp
+                            log(arrCocktailSort)
+                            changeCount++
+                        }
+                    }
+                    leftIndex++
+                    iteration++
+                }
+                    log('Сортування змішуванням. Кількість:')
+                    log(`- ітерацій           : ${iteration}`)
+                    log(`- порівнянь          : ${compares}`)
+                    log(`- перестановок ел-тів: ${changeCount}`)
+                    log('')
+
+                    // Insertion sort
+                    const arrInsertionSort = [...randArray]
+                    log('Згенеровано масив:     ')
+                    log(randArray)
+                    log('-----------')
+                    changeCount = 0
+                    compares = 0
+
+                    let key, j
+                    for (let i = 1; i < arrInsertionSort.length; i++) {
+                        key = arrInsertionSort[i]
+                        j = i - 1
+                        while (j >= 0 && arrInsertionSort[j] > key) {
+                            arrInsertionSort[j + 1] = arrInsertionSort[j]
+                            compares++
+                            j -= 1
+                        }
+                        arrInsertionSort[j + 1] = key
+                        log(arrInsertionSort)
+                        changeCount++
+                    }
+
+                    log('Кількість:')
+                    log(`- порівнянь          : ${compares}`)
+                    log(`- перестановок ел-тів: ${changeCount}`)        
+                    
+                    
+
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

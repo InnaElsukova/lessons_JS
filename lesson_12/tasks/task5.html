@@ -1,0 +1,52 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 5</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 5</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я «Olga» і під яким
+                індексом.
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const names = ['Pavlo', 'Olena', 'Ivan', 'Olga', 'Evgen', 'Anna', 'Andrew']
+                log(`Створено масив:     ${names}`)
+                names.sort()
+                log(`Відсортовано масив:    ${names}`)
+                let start = 0
+                let end = names.length - 1
+                let middle
+                let searchName = 'Olga'
+                let searchIndex
+                while(start <= end) {
+                    middle = Math.floor((start + end) / 2) 
+                    if(names[middle] === searchName) {
+                        searchIndex = middle
+                        break
+                    }
+                    if(names[middle] < searchName)
+                        start = middle + 1
+                    if (names[middle] > searchName)
+                        end = middle - 1
+                }
+                log(`${searchName} під індексом ${searchIndex}`)
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

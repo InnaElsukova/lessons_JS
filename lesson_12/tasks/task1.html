@@ -1,0 +1,54 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header__container">
+                <h1>Задача 1</h1>
+            </div>
+        </header>   
+        <main class="page">
+            <div class="page__container">
+                <p>
+                    Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів та порівнянь чисел під час сортування бульбашкою
+                </p>
+
+                <script src="../js/script.js"></script>
+                <script>
+                    const randArray = generateRandomArray(1, 100, 30)
+                    log(`Згенеровано масив 30 чисел:     ${randArray}`)
+                    let changes = false
+                    let changeCount = 0
+                    let iteration = 1
+                    let compares = 0
+                    do {
+                        changes = false
+                        for(let i = 1; i < randArray.length; i++) {
+                            compares++
+                            if(randArray[i] < randArray[i-1]) {
+                                let temp = randArray[i]
+                                randArray[i] = randArray[i-1]
+                                randArray[i-1] = temp
+                                changes = true
+                                changeCount++
+                            }
+                        }
+                        iteration++
+                    } while (changes)
+                    log('Кількість:')
+                    log(`- ітерацій           : ${iteration}`)
+                    log(`- порівнянь          : ${compares}`)
+                    log(`- перестановок ел-тів: ${changeCount}`)
+                    log(`Масив відсортований бульбашкою: ${randArray}`)
+                </script>
+            </div>
+        </main>     
+    </div>
+</body>
+</html> 
