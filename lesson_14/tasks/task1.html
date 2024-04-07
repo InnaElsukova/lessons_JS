@@ -1,0 +1,190 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header__container">
+                <h1>Задача 1</h1>
+            </div>
+        </header>   
+        <main class="page">
+            <div class="page__container">
+                <p>
+                    Описати масив об’єктів – сайтів розроблених компанією з такими властивостями <br>
+                    ----- Властивості ------<br>
+                    назва компанії на час розробки (назву періодично змінюють)<br>
+                    власник компанії<br>
+                    споснсори (масив спонсорів)<br>
+                    * прізвище спонсора<br>
+                    * ім’я спонсора<br>
+                    * сума вкладень спонсора<br>
+                    рік випуску<br>
+                    вартість сайту<br>
+                    
+                    Знайти:
+                    <ol class="subtasks">
+                        <li>загальну вартість усіх сайтів</li>
+                        <li>кількість сайтів, що було зроблено між 2000 та 2009 рр</li>
+                        <li>кількість сайтів, де сума спонсорських вкладень була більшою за 100000</li>
+                        <li>створити загальний список усіх спонсорів (поки можуть повторюватись, просто зібрати усі у масив)</li>
+                        <li>знайти рік, коли прибуток був найбільшим</li>
+                        <li>упорядкувати список за спаданням прибутку</li>
+                        <li>Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 10000 і більше 10000</li>
+                    </ol>
+                </p>
+
+                <script src="../js/script.js"></script>
+                <script>
+                    let sitesList = [
+                    {
+                        companyName: 'Microsoft',
+                        companyOwner: 'Bill Gates',
+                        sponsors: [
+                            {
+                                secondName: 'DiCaprio',
+                                firstName: 'Leonardo',
+                                investmentAmount: 123000
+                            },
+                            {
+                                secondName: 'Crowe',
+                                firstName: 'Russell',
+                                investmentAmount: 5000
+                            }
+                        ],
+                        sinceYear: 1975,
+                        siteCost: 1000000
+                    },
+                    {
+                        companyName: 'Corporation',
+                        companyOwner: 'Kevin Spacey',
+                        sponsors: [
+                            {
+                                secondName: 'Douglas',
+                                firstName: 'Michael',
+                                investmentAmount: 11000
+                            },
+                            {
+                                secondName: 'Depp',
+                                firstName: 'Johnny',
+                                investmentAmount: 15000
+                            },
+                            {
+                                secondName: 'Kruz',
+                                firstName: 'Tom',
+                                investmentAmount: 78560
+                            }
+                        ],
+                        sinceYear: 2001,
+                        siteCost: 9000
+                    },
+                    {
+                        companyName: 'Google',
+                        companyOwner: 'Larry Page',
+                        sponsors: [
+                            {
+                                secondName: 'De Niro',
+                                firstName: 'Robert',
+                                investmentAmount: 5000
+                            },
+                            {
+                                secondName: 'Nicholson',
+                                firstName: 'Jack',
+                                investmentAmount: 7800
+                            },
+                            {
+                                secondName: 'Kruz',
+                                firstName: 'Tom',
+                                investmentAmount: 7856
+                            }
+                        ],
+                        sinceYear: 2008,
+                        siteCost: 190000
+                    },
+                    {
+                            companyName: 'Holywood',
+                            companyOwner: 'Tom Hanks',
+                            sponsors: [
+                                {
+                                    secondName: 'Hopkins',
+                                    firstName: 'Anthony',
+                                    investmentAmount: 900
+                                },
+                                {
+                                    secondName: 'Freeman',
+                                    firstName: 'Morgan',
+                                    investmentAmount: 11000
+                                }
+                            ],
+                            sinceYear: 2012,
+                            siteCost: 85000
+                        }
+                    ]
+
+                    function printSitesList(sitesList) {
+                        for(site of sitesList)
+                            log(`Компанія - ${site.companyName}, власник - ${site.companyOwner}, рік випуску - ${site.sinceYear} вартість сайту - ${site.siteCost}`)
+                        log('')
+                    }
+                    printSitesList(sitesList)
+                    console.log(sitesList)
+
+                    //Загальна вартість усіх сайтів:
+                    const totalSitesCost = sitesList.reduce(
+                        (prevSum, site) => prevSum + site.siteCost, 0)
+                    log(`1. Загальна вартість усіх сайтів: ${totalSitesCost}`)
+                    
+                    //Кількість сайтів, що було зроблено між 2000 та 2009 рр
+                    const countSites20XX = sitesList.reduce(
+                            (prevSum, site) => site.sinceYear > 2000 && site.sinceYear < 2009 ? prevSum + 1 : prevSum, 0)
+                    log(`2. Кількість сайтів, що було зроблено між 2000 та 2009 рр: ${countSites20XX}`)
+                    
+                    //Кількість сайтів, де сума спонсорських вкладень була більшою за 100000
+                    const countSitesBigInvestment = sitesList.reduce(
+                        (prevCnt, site) => site.sponsors.reduce((prevSum, sponsor) => prevSum + sponsor.investmentAmount ,0) > 100000 ? prevCnt + 1 : prevCnt
+                        ,0)
+                    log(`3. Кількість сайтів, де сума спонсорських вкладень була більшою за 100000: ${countSitesBigInvestment}`)
+                    
+                    //Загальний список усіх спонсорів
+                    const sponsorList = sitesList.reduce((prevList, site) => 
+                        [...prevList,
+                        site.sponsors.reduce((prevSponsors, sponsor) => [...prevSponsors, `${sponsor.firstName} ${sponsor.secondName}`] ,[])
+                        ]
+                        ,[])
+                    log(`4. Загальний список усіх спонсорів: ${sponsorList}`)
+
+                    // Рік, коли прибуток був найбільшим
+                    const maxCost = sitesList.reduce((prevCost, site) => 
+                        site.siteCost > prevCost.cost ? prevCost = { cost: site.siteCost, year: site.sinceYear } : prevCost 
+                        ,{cost: 0, year: 0})
+                    log(`5. Рік, коли прибуток був найбільшим: ${maxCost.year} (прибуток становив ${maxCost.cost})`)
+
+                    // Упорядкувати список за спаданням прибутку
+                    sitesList.sort((a, b) => b.siteCost - a.siteCost)
+                    log(`6. Упорядкувати список за спаданням прибутку:`)
+                    printSitesList(sitesList)
+                    
+                    // Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 10000 і більше 10000
+                    log(`7. Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 10000 і більше 10000: `)
+                    log(`Cайти з вартістью до 10000: `)
+                    const sitesLess1000 = sitesList.filter((site) => site.siteCost <= 10000)
+                    printSitesList(sitesLess1000)
+
+                    log(`Cайти з вартістью більше 10000: `)
+                    const sitesMore1000 = sitesList.filter((site) => site.siteCost > 10000)
+                    printSitesList(sitesMore1000)
+
+                    
+
+
+                </script>
+            </div>
+        </main>     
+    </div>
+</body>
+</html> 

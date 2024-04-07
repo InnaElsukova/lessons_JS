@@ -1,0 +1,60 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 2</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Розробити функцію, у яку передають об’єкт (день, місяць, рік). Визначити, який буде рік через N місяців.
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                function getYear(data, monthCount) {
+                    const monthLeftInCurrrentYear = 12 - data.month 
+                    let year
+                    if(monthLeftInCurrrentYear === monthCount)
+                        year = ++data.year
+                    else
+                        year = monthCount < monthLeftInCurrrentYear && monthCount !== monthLeftInCurrrentYear ? data.year : data.year + Math.ceil((monthCount - monthLeftInCurrrentYear) / 12)
+                    return year
+                }
+
+                let data = {
+                    year: 2024,
+                    month: 4,
+                    day:8
+                }
+                let monthCount = 8
+                
+                let moreCalc
+                do {
+                    let year = getYear(data, monthCount)
+                    alert(`Поточні дані: дата ${data.day}/${data.month}/${data.year}. Через ${monthCount} місяців буде ${year} рік`)
+                    moreCalc = confirm('Бажаєте порахувати для інших даних?')
+                    if(moreCalc) {
+                        data.day = parseInt(prompt('Введіть день', 1))
+                        data.month = parseInt(prompt('Введіть місяць', 1))
+                        data.year = parseInt(prompt('Введіть рік', 1))
+                        monthCount = parseInt(prompt('Введіть кількість місяців для розрахунку', 1))
+                    }
+                } while(moreCalc)
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>
