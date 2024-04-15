@@ -1,0 +1,103 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 2</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Створити об’єкт «Авто».
+                Поля(властивості)
+                <ul>
+                    <li>Марка</li>
+                    <li>Розмір бака</li>
+                    <li>Кількість наявних літрів</li>
+                    <li>Кількість місць</li>
+                    <li>Кількість пасажирів</li>
+                </ul>
+                Методи (дії)
+                <ul>
+                    <li>Заправка на вказану кількість літрів</li>
+                    <li>Виведення кількості пасажирів</li>
+                    <li>Додавання пасажирів</li>
+                    <li>Висадка пасажирів</li>
+                </ul>
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                class Auto {
+                    constructor(model, tankSize, tankLitres, totalPassCount, passCount) {
+                        this.model = model
+                        this.tankSize = tankSize
+                        this.tankLitres = tankLitres
+                        this.totalPassCount = totalPassCount
+                        this.passCount = passCount
+                    }
+
+                    refuel (litres) {
+                        const leftLitres = this.tankSize - this.tankLitres
+                        if(leftLitres >= litres) {
+                            this.tankLitres += litres
+                            log(`Машину дозаправлено на ${litres}л , тепер в машині ${mers.tankLitres} л`)
+                        }
+                        else
+                            alert(`Можна заправити не більше ${leftLitres} літрів`)
+                    }
+
+                    currentPassCount () {
+                        return this.passCount
+                    }
+
+                    getOfPass (countPass) {
+                        if(this.passCount < countPass)
+                            alert(`Можна висадити не більше ${this.passCount} пасажирів`)
+                        else {
+                            this.passCount -=countPass
+                            log(`З машини висадили ${countPass} пасажирів , лишилось ${this.currentPassCount()}`)
+                        }
+                    }
+
+                    enterPass (countPass) {
+                        const placesLeft = this.totalPassCount - this.passCount
+                        if(placesLeft >= countPass) {
+                            this.passCount += countPass
+                            log(`В машину додано  ${countPass} пасажирів , тепер в машині ${this.currentPassCount()} пасажирів`)
+                        }
+                        else
+                            alert(`Можна посадити не більше ${placesLeft} пасажирів`)
+                    }
+                }
+
+                const mers = new Auto('Mercedes', 70, 25, 5, 3)
+                log(`Марка машини ${mers.model}`)
+                log(`Розмір баку ${mers.tankSize}, в ньому лишилося ${mers.tankLitres}`)
+                log(`Кількість місць ${mers.totalPassCount}, з них зайняті ${mers.currentPassCount()}`)
+                log(``)
+
+                const litres = parseFloat(prompt(`Скільки літрів палива бажаєте заправити. Розмір бака ${mers.tankSize}, заправлено ${mers.tankLitres}`, 10))
+                mers.refuel(litres)
+
+                const countGetOffPass = parseInt(prompt(`Скільки пасажирів необхідно висадити?. Зараз в машині ${mers.currentPassCount()} пасажирів`, 1))
+                mers.getOfPass(countGetOffPass)
+                
+                const countEnterPass = parseInt(prompt(`Скільки пасажирів необхідно додати?. Зараз в машині ${mers.currentPassCount()} пасажирів`, 1))
+                mers.enterPass(countEnterPass)
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html> 

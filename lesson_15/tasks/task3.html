@@ -1,0 +1,82 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 3</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Розробити клас MultChecker для перевірки таблиці множення
+                Поля(властивості)
+                <ul>
+                    <li>Число, яке перевіряємо (наприклад, перевірка частини таблиці множення на 7)</li>
+                    <li>Кількість правильних відповідей</li>
+                    <li>Кількість неправильних відповідей</li>
+                </ul>
+                Методи (дії)
+                <ul>
+                    <li>Генерування прикладу (метод випадковим чином визначає друге число, перше число фіксоване)</li>
+                    <li>Перевірка правильності вказаної відповіді</li>
+                    <li>render - виведення інформації про тестування на екран</li>
+                </ul>
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                    class MultChecker {
+                        constructor(checkingNum, countRight, countErr) {
+                            this.checkingNum = checkingNum
+                            this.countRight = countRight
+                            this.countErr = countErr
+                        }
+
+                        genExamples() {
+                            const num = 1 + Math.floor(Math.random() * 10)
+                            const result = parseInt(prompt(`${this.checkingNum} * ${num} = ?`))
+                            this.checkRes(num, result)
+                        }
+
+                        checkRes(num, result) {
+                            if (this.checkingNum * num === result) {
+                                this.countRight++
+                                alert('Вірно!')
+                            }
+                            else {
+                                this.countErr++
+                                alert('Невірно!')
+                            }
+                        }
+
+                        render() {
+                            log(`Перевіряли таблицю множення на ${check7.checkingNum}`)
+                            log(`Вірних відповідей ${check7.countRight}`)
+                            log(`Невірни відповідей ${check7.countErr}`)
+                        }
+                    }
+
+                    let check7 = new MultChecker(7, 0, 0)
+                    let continueChecking
+                    do {
+                        check7.genExamples()
+                        continueChecking = confirm('Розв"яжемо ще один прикдад?')
+                    } while(continueChecking)
+                    
+                    check7.render()
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

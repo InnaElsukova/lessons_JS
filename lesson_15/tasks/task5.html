@@ -1,0 +1,72 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 5</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 5</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Розробити клас «Керівник танців»
+                Поля(властивості)
+                <ul>
+                    <li>Масив імен хлопців</li>
+                    <li>Масив імен дівчат</li>
+                </ul>
+                Методи (дії)
+                <ul>
+                    <li>Метод випадкового вибору імені хлопця</li>
+                    <li>Метод випадкового вибору імені дівчини</li>
+                    <li>Метод виведення пари для танців</li>
+                    <li>Метод run , який ініціює через кожні 5 секунд виведення нової пари для танців</li>
+                </ul>
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const boys = ['Ivan', 'Sergiy', 'Stepan', 'Olexander', 'Vasyl I', 'Vasyl II', 'Mykola', 'Sashko', 'Yevgen']
+                const girls = ['Sveta', 'Olesya', 'Iryna', 'Sofiya', 'Galyna', 'Ivonna', 'Marysia', 'Kvitka']
+                class DanceClub {
+                    constructor(boys, girls) {
+                        this.boys = boys
+                        this.girls = girls
+                    }
+
+                    selectRandomBoy () {
+                        let randNum = Math.floor(Math.random() * this.boys.length)
+                        return this.boys[randNum]
+                    }
+
+                    selectRandomGirl () {
+                        let randNum = Math.floor(Math.random() * this.girls.length)
+                        return this.girls[randNum]
+                    }
+
+                    outputCouple () {
+                        log(`${this.selectRandomBoy() } та ${this.selectRandomGirl() }`)
+                    }
+
+                    run () {
+                        setInterval(() => this.outputCouple(), 2000)
+                    }
+                }
+
+                const dancers = new DanceClub(boys, girls)
+                dancers.run()
+                
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

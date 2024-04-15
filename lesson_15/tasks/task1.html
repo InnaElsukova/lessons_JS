@@ -1,0 +1,133 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+      td {
+        width: 40px;
+        height: 40px;
+      }
+      td img {
+        width: 37px;
+      }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header__container">
+                <h1>Задача 1</h1>
+            </div>
+        </header>   
+        <main class="page">
+            <div class="page__container">
+                <p>
+                    Створити об’єкт «Тир». У масиві зберігаються 1, якщо у цьому квадраті є заєць і 0 в іншому випадку.
+                    Поля(властивості)
+                    <ul>
+                      <li>Масив, у якому зберігається поле з зайцями</li>
+                    </ul>
+                    Методи (дії)
+                    <ul>
+                      <li>Метод пострілу (задається позиція пострілу)</li>
+                      <li>Виведення ігрового поля</li>
+                    </ul>
+                </p>
+
+                <script src="../js/script.js"></script>
+                <script>
+                    let rabbitField = [
+                        [1, 0, 1],
+                        [0, 1, 0],
+                        [1, 1, 0]
+                      ]
+
+                    class Shoting {
+
+                      constructor (rabbitField) {
+                        this.rabbitField = rabbitField
+                      }
+
+                      checkShot(dimention) {
+                        let unCorrectCoordinate
+                        let shot
+                        do {
+                          shot = parseInt(prompt(`Задайте координати пострілу - ${dimention} від 1 до ${rabbitField.length}`)) - 1
+                          unCorrectCoordinate = shot < 0 || shot > rabbitField.length - 1 // на даному етапі вважаємо поле квадратним
+                          if (unCorrectCoordinate)
+                            alert(`Будьте уважні - ${dimention} від 1 до ${rabbitField.length}`)
+                        } while (unCorrectCoordinate)
+                        return shot
+                      }
+
+                      analysisShot(y, x) {
+                        switch(this.rabbitField[y][x]) {
+                            case 0: // порожня клітина
+                            this.rabbitField[y][x] = 2
+                            alert('Промах(')
+                            break;
+                          case 1: // кролик
+                            this.rabbitField[y][x] = 10
+                            alert('Влучили!')
+                            break;
+                          case 2: // промах
+                            alert('Промах( ви вже стріляли по цій позиції')
+                            break;
+                          case 10: // кролик, в якого влучили
+                            alert('Влучили минулого разу, ви вже стріляли по цій позиції')
+                            break;
+                        }
+                      }
+
+                      takeShot () {
+                        let shotY = this.checkShot('строка')
+                        let shotX = this.checkShot('стовбець')
+                        this.analysisShot(shotY, shotX)
+                      }
+
+                      showField () {
+                        document.write('<table>')
+                          this.rabbitField.forEach(line => {
+                            document.write('<tr>')
+                              line.forEach(cell => {
+                                switch(cell) {
+                                  case 0: // порожня клітина
+                                    document.write('<td>')
+                                    break;
+                                  case 1: // кролик, в якого не влучили
+                                    document.write('<td><img src="img/rabbit.svg" alt="">')
+                                    break;
+                                  case 2: // промах
+                                    document.write('<td class="hits">')
+                                    break;
+                                  case 10: // кролик, в якого влучили
+                                    document.write('<td class="hits"><img src="img/rabbit.svg" alt="">')
+                                    break;
+                                }
+                                document.write('</td>')
+                              })
+                            document.write('</tr>')
+                          });
+                        document.write('</table>')
+                      }
+                      
+                    }
+
+                    let shootGame = new Shoting(rabbitField)
+                    let continueGame
+                    do {
+                      shootGame.takeShot()
+                      continueGame = confirm('Бажаєте зробити ще постріл? Якщо ні - буде виведено ігрове поле.')
+                    } while(continueGame)
+
+                    shootGame.showField()
+
+                </script>
+            </div>
+        </main>     
+    </div>
+</body>
+</html> 

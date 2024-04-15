@@ -1,0 +1,79 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 0</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 0</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Дано два об’єкта. Обидва містять масив цілих чисел. При цьому у одному з них є функція знаходження суми, а у іншому –
+                функція для знаходження добутку тих, які знаходяться між заданими мінімальним і максимальних значенням.
+                Використати обидва методи стосовно обидвох об’єктів (використати call, apply)
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                let randArray = generateRandomArray(1, 10, 8) // min, max, count
+                const minVal = 3, maxVal = 8
+
+                class ArrProduct {
+                    constructor(arr) {
+                        this.array = arr
+                    }
+
+                    getArrayProduct(min, max) {
+                        return this.array.reduce((prevProd, item) => item > min && item < max ? prevProd * item : prevProd, 1)
+                    }
+
+                    toString() {
+                        return `${this.array}`
+                    }
+                }
+
+                class ArrSum {
+                    constructor(arr) {
+                        this.array = arr
+                    }
+
+                    getArraySum(min, max) {
+                        return this.array.reduce((prevProd, item) => item > min && item < max ? prevProd + item : prevProd, 0)
+                    }
+
+                    toString() {
+                        return `${this.array}`
+                    }
+                }
+
+                log(`Згенеровано масив: ${randArray}`)
+                log(`Мінімальне значення для обчислень: ${minVal}, максимальне значення: ${maxVal}`)
+
+                let arrayWithProduct = new ArrProduct(randArray)
+                let arrayWithSum = new ArrSum(randArray)
+
+                log(``)
+                log(`Виклик функції знаходження добутку для об'єкта який її містить ${arrayWithProduct.getArrayProduct(minVal, maxVal)}`)
+                log(`Виклик функції знаходження суми для об'єкта який її містить ${arrayWithSum.getArraySum(minVal, maxVal)}`)
+                log(``)
+                log(`Виклик функції знаходження добутку для об'єкта який її НЕ містить (метод .call) ${arrayWithProduct.getArrayProduct.call(arrayWithSum, minVal, maxVal) }`)
+                log(`Виклик функції знаходження суми для об'єкта який її НЕ містить (метод .call) ${arrayWithSum.getArraySum.call(arrayWithProduct, minVal, maxVal)}`)
+                log(``)
+                log(`Виклик функції знаходження добутку для об'єкта який її НЕ містить (метод .apply) ${arrayWithProduct.getArrayProduct.apply(arrayWithSum, [minVal, maxVal])}`)
+                log(`Виклик функції знаходження суми для об'єкта який її НЕ містить (метод .apply) ${arrayWithSum.getArraySum.apply(arrayWithProduct, [minVal, maxVal])}`)
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

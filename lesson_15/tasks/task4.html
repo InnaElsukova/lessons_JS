@@ -1,0 +1,76 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        img {
+            border: 3px solid black;
+            border-radius: 5px;
+        }
+
+        img:hover {
+            border: 3px solid red;
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 4</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Розробити клас Baner
+                Поля(властивості)
+                <ul>
+                    <li>Масив об’єктів ( графічних зображень та посилань на сайти)</li>
+                </ul>
+                Методи (дії)
+                <ul>
+                    <li>Метод випадкового вибору об’єкта (графічного зображення та посилання)</li>
+                    <li>Метод виведення випадкового банера</li>
+                </ul>
+
+                <!-- <a href="https://www.bing.com/"><img src="img/bing.jpg" alt=""></a> -->
+                
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                const banerInfo = [
+                    ['bing.jpg', 'https://www.bing.com/'],
+                    ['censor.png', 'https://censor.net/'],
+                    ['google.png', 'https://www.google.com.ua'],
+                    ['ukrainian.png', 'https://www.pravda.com.ua/']
+                ]
+                class Baner {
+                    constructor(banerInfo) {
+                        this.banerInfo = banerInfo
+                    }
+
+                    showBaner (num) {
+                        document.write(`<a target="_blank" href="${this.banerInfo[num][1]}"><img src="img/${this.banerInfo[num][0]}" alt=""></a>`)
+                    }
+
+                    selectRandomBaner () {
+                        return Math.floor(Math.random() * this.banerInfo.length)
+                    }
+                }
+                    
+                const baners = new Baner(banerInfo)
+                const randBanerNum = baners.selectRandomBaner()
+                baners.showBaner(randBanerNum)
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>
