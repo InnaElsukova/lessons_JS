@@ -1,0 +1,167 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 3</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Об’єкт “Фірма” (використати члени-класи)
+                Поля(властивості)
+                <ul>
+                    <li>назва фірми;</li>
+                    <li>дата заснування (рік, місяць);</li>
+                    <li>послуги (назва послуги, вартість, термін виконання);</li>
+                    <li>адреси філіалів (країна, місто, вулиця, номер будинку);</li>
+                </ul>
+                Методи (дії)
+                <ul>
+                    <li>визначення кількості років існування фірми;</li>
+                    <li>виведення всіх філіалів фірми у вказаному місті;</li>
+                    <li>виведення на екран послуг, що можуть бути виконані за вказану суму грошей та вказаний термін часу;</li>
+                </ul>
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                    class Firm {
+                        constructor(name, estDate = new EstDate(), services, branches) {
+                            this.name = name
+                            this.estDate = estDate
+                            this.services = services
+                            this.branches = branches
+                        }
+
+                        toString() {
+                            return `${this.name} заснована ${this.estDate.Month}/${this.estDate.Year}`
+                        }
+
+                        //визначення кількості років існування фірми;
+                        getWorkYears() {
+                            let today = new Date()
+                            return today.getFullYear() - this.estDate.Year
+                        }
+                        
+                        //виведення всіх філіалів фірми у вказаному місті;
+                        getBrancesInCity(city) {
+                            return this.branches.filter(branch => branch.city === city)
+                        }
+
+                        //виведення на екран послуг, що можуть бути виконані за вказану суму грошей та вказаний термін часу;
+                        getService(sum, time) {
+                            return this.services.filter(service => service.Price <= sum && service.deadline <= time)
+                        }
+                    }
+
+                    class EstDate {
+                        #month
+                        #year
+                        get Month() {
+                            return this.#month
+                        }
+                        set Month(month) {
+                            if(month < 1 || month > 12)
+                                throw new Error(`Місяць від 1 до 12`)
+                            this.#month = month
+                        }
+
+                        get Year() {
+                            return this.#year
+                        }
+                        set Year(year) {
+                            if(year < 1900)
+                                throw new Error(`Рік більше 1900`)
+                            this.#year = year
+                        }
+
+                        constructor(month, year) {
+                            this.Month = month
+                            this.Year = year
+                        }
+
+                        toString() {
+                            return `${this.Month}/${this.Year}`
+                        }
+                    }
+
+                    class Service {
+                        #name
+                        #price
+                        get Name() {
+                            return this.#name
+                        }
+                        set Name(name) {
+                            if(name.length === 0)
+                                throw new Error('Назва не може бути порожньою')
+                            this.#name = name
+                        }
+
+                        get Price() {
+                            return this.#price
+                        }
+                        set Price(price) {
+                            if(isNaN(price) || price<=0)
+                                throw new Error('Ціна - додатнє число')
+                            this.#price = price
+                        }
+                        constructor(name, price, deadline) {
+                            this.Name = name
+                            this.Price = price
+                            this.deadline = deadline // hours
+                        }
+                        
+                        toString() {
+                            return `${this.Name}, ${this.Price} грн - ${this.deadline} годин`
+                        }
+                    }
+
+                    class Branch {
+                        // тут немє захищених полів, щоб не роздувати однаковий код (не порожня строка)
+                        constructor(country, city, street, building) {
+                            this.country = country
+                            this.city = city
+                            this.street = street
+                            this.building = building
+                        }
+
+                        toString() {
+                            return `${this.country}, м.${this.city}, вул.${this.street}, буд.${this.building}`
+                        }
+                    }
+
+                    let firm = new Firm(
+                        'New Firm', 
+                        new EstDate(9, 2012), 
+                        [new Service('Прибирання', 2000, 4), new Service('Фарбування', 900, 2), new Service('Сервірування', 1300, 3)],
+                        [new Branch('Україна', 'Київ', 'Володимирська', 55), new Branch('Україна', 'Житомир', 'Львівська', 48), new Branch('Україна', 'Київ', 'Хрещатик', 1)]
+                    )
+
+                    log(`Фірма існує ${firm.getWorkYears()} років. (Заснована у ${firm.estDate.Year})`)
+
+                    const city = 'Київ'
+                    log(`Адреси усіх філіалів у м.${city}:`)
+                    log(`${firm.getBrancesInCity('Київ')}`)
+
+                    const sum = 1500, time = 3
+                    log(`Перелік послуг, які можуть бути виконані за ${sum} грн та ${time} годин:`)
+                    log(`${firm.getService(sum, time) }`)
+                    console.log(firm)
+                    
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

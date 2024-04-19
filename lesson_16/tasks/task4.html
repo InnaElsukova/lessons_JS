@@ -1,0 +1,129 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        img {
+            border: 3px solid black;
+            border-radius: 5px;
+        }
+
+        img:hover {
+            border: 3px solid red;
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 4</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Створити клас TBankomat, який моделює роботу банкомата. Клас повинен містити поля для зберігання кількості купюр кожного
+                із номіналів від 5 до 200 гривень. Реалізувати методи знаходження максимальної та мінімальної сум, які може видати
+                банкомат, та метод зняття деякої суми.
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                class Banknote {
+                        constructor(nominal, count) {
+                            this.nominal = nominal
+                            this.count = count
+                        }
+
+                        getSum() {
+                            return this.nominal * this.count
+                        }
+
+                        toString() {
+                            return `${this.nominal} грн - ${this.count} шт`
+                        }
+                    }
+
+                class TBankomat {
+                    constructor (banknotesList) {
+                        this.banknotesList = banknotesList
+                    }
+
+                    getMaxSum() {
+                        return this.banknotesList.reduce((prevSum, banknote) => prevSum + banknote.getSum(),0)
+                    }
+
+                    getMinSum() {
+                        return this.banknotesList.reduce((prevNominal, banknote) => banknote.count > 0 && banknote.nominal < prevNominal ? banknote.nominal : prevNominal, Infinity)
+                    }
+
+                    getBancnotesCount(sum) {
+                        this.banknotesList.sort((a, b) => b.nominal-a.nominal)
+                        console.log(banknotesList)
+                        let withdrawal = []
+                        for (const banknote of banknotesList) {
+                            let count = Math.floor(sum / banknote.nominal)
+                            if(banknote.count < count) 
+                                count = banknote.count
+                            withdrawal.push([banknote.nominal, count])
+                            sum -= banknote.nominal * count
+                        }
+                        if(!sum) 
+                            return withdrawal
+                        else
+                            return []
+                    }
+
+                    getAmount(sum) {
+                        let withdrawal = this.getBancnotesCount(sum)
+                        if(sum > this.getMaxSum())
+                            return `Недостатньо грошей в банкоматі`
+                        if(withdrawal.length === 0)
+                            return `Неможливо видати зазначену суму`
+                        else {
+                            return withdrawal.reduce((prevMes, banknote) => banknote[1] !==0 ? prevMes + `${banknote[0]} грн - ${banknote[1]} шт;` : prevMes ,``)
+                        }
+                    }
+
+                }
+
+                let banknotesList = [
+                new Banknote(200, 1),
+                new Banknote(100, 9),
+                new Banknote(50, 0),
+                new Banknote(20, 7),
+                new Banknote(10, 0),
+                new Banknote(5, 0),
+            ]
+
+            let bankomat = new TBankomat(banknotesList)
+            log(`В банкомат завантажено купюри:`)
+            for(const banknote of banknotesList)
+                log(`${banknote.toString()}`)
+
+            log(`Максимальна сума грошей в банкоматі: ${bankomat.getMaxSum()} грн`)
+            log(`Мінімальна сума грошей в банкоматі: ${bankomat.getMinSum()} грн`)
+            log(``)
+            let amount = 520
+            log(`Замовлено видачу ${amount} грн`)
+            log(`${bankomat.getAmount(amount)}`)
+            log(``)
+            amount = 5200
+            log(`Замовлено видачу ${amount} грн`)
+            log(`${bankomat.getAmount(amount)}`)
+            log(``) 
+            amount = 52
+            log(`Замовлено видачу ${amount} грн`)
+            log(`${bankomat.getAmount(amount)}`)
+
+        </script>
+        </div>
+    </main>     
+
+</body>
+</html>

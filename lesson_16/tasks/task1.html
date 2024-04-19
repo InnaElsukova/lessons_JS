@@ -1,0 +1,152 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+      td {
+        width: 40px;
+        height: 40px;
+      }
+      td img {
+        width: 37px;
+      }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header__container"> 
+                <h1>Задача 1</h1>
+            </div>
+        </header>   
+        <main class="page">
+            <div class="page__container">
+                <p>
+                    Створити клас TDate для роботи із датами у форматі “день.місяць.рік”. Дата представляється структурою із трьома полями.
+                    Реалізувати методи збільшення/зменшення дати на певну кількість днів, місяців чи років. Введення та виведення дати
+                    реалізувати за допомогою методу toString.
+                </p>
+
+                <script src="../js/script.js"></script>
+                <script>
+                    
+                    class TDate {
+                      #year
+                      get Year () {
+                        return this.#year
+                      }
+                      set Year (year) {
+                        if(year < 0)
+                          throw new Error ('Рік має бути додатнім, наша ера)')
+                        this.#year = year
+                      }
+
+                      constructor (day, month, year) {
+                        this.day = day
+                        this.month = month
+                        this.Year = year
+                      }
+
+                      correctDate () {
+                        const dayInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+                        if(this.month > 12) {
+                          this.Year += Math.floor(this.month / 12)
+                          this.month = this.month % 12
+                        }
+
+                        if(this.month < 0) {
+                          this.Year += Math.floor(this.month / 12)
+                          this.month = 12 + this.month % 12
+                        }
+
+                        if (this.month === 0) {
+                          this.Year = this.Year - 1
+                          this.month = 12 
+                        }
+                        // якщо при зміненні місяця, в поточному місяці немає такого числа (наприклад 30.02), "зайві" дні переносяться на наступний місяць
+                        while(this.day > dayInMonth[this.month - 1]) {
+                          this.day = this.day - dayInMonth[this.month - 1]
+                          this.month++
+                          this.correctDate()
+                        }
+
+                        while(this.day <= 0) {
+                          this.month--
+                          if (this.month === 0) {
+                            this.Year = this.Year - 1
+                            this.month = 12
+                          }
+                          this.day += dayInMonth[this.month - 1]
+                          this.correctDate()
+                        }
+                      }
+
+                      increaceYear(year) {
+                        this.Year += year                        
+                      }
+
+                      decreaсeYear(year) {
+                        this.Year -= year
+                      }
+
+                      increaceMonth(month) {
+                        this.month +=month
+                        this.correctDate()
+                      }
+
+                      decreaсeMonth(month) {
+                        this.month -= month
+                        this.correctDate()
+                      }
+
+                      increaceDays(days) {
+                        this.day += days
+                        this.correctDate()
+                      }
+
+                      decreaсeDays(days) {
+                        this.day -= days
+                        this.correctDate()
+                      }
+
+                      toString() {
+                        return `${this.day}.${this.month}.${this.Year}`
+                      }
+                    }
+
+                    let myDate = new TDate(31, 10, 1997)
+                    log(myDate);
+                    
+                    let incYear = 7
+                    myDate.increaceYear(incYear)
+                    log(`Дату збільшено на ${incYear} років ${myDate}`);
+
+                    let decYear = 2
+                    myDate.decreaсeYear(decYear)
+                    log(`Дату зменшено на ${decYear} років ${myDate}`);
+                  
+                    let incMonth = 5
+                    myDate.increaceMonth(incMonth)
+                    log(`Дату збільшено на ${incMonth} місяців ${myDate}`);
+
+                    let decMonth = 4
+                    myDate.decreaсeMonth(decMonth)
+                    log(`Дату зменшено на ${decMonth} місяців ${myDate}`);
+
+                    let incDays = 35
+                    myDate.increaceDays(incDays)
+                    log(`Дату збільшено на ${incDays} днів ${myDate}`);
+
+                    let decDays = 14
+                    myDate.decreaсeDays(decDays)
+                    log(`Дату зменшено на ${decDays} днів ${myDate}`);
+                </script>
+            </div>
+        </main>     
+    </div>
+</body>
+</html> 

@@ -1,0 +1,90 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 2</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Створити клас TMoney для роботи з грошовими сумами. Сума повинна зберігатися у вигляді доларового еквіваленту.
+                Реалізувати методи додавання/вилучення грошової маси, вказуючи необхідну суму у гривнях, та визначення курсу долара, при
+                якому сума у гривнях збільшиться на 100. Курс долара зберігати в окремому полі.
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                class TMoney {
+                    #exchangeRate
+                    #sumUSD
+
+                    get ExchangeRate() {
+                        return this.#exchangeRate
+                    }
+                    set ExchangeRate(rate) {
+                        if(rate <= 0)
+                            throw new Error('Курс валют має бути додатнім')
+                        this.#exchangeRate = rate
+                    }
+
+                    get SumUSD() {
+                        return this.#sumUSD
+                    }
+                    set SumUSD(sum) {
+                        if(sum < 0)
+                            throw new Error('Сума на рахунку має бути додатньою')
+                        this.#sumUSD = sum
+                    }
+
+                    constructor(sumUSD, rate) {
+                        this.SumUSD = sumUSD
+                        this.ExchangeRate = rate
+                    }
+
+                    addUAH(sumUAH) {
+                        this.SumUSD += sumUAH / this.ExchangeRate
+                    }
+
+                    withdrawUAH(sumUAH) {
+                        this.SumUSD -= sumUAH / this.ExchangeRate
+                    }
+
+                    getNewRate() {
+                        return (this.SumUSD * this.ExchangeRate + 100) / this.SumUSD
+                    }
+
+                    toString () {
+                        return `USD: ${this.SumUSD.toFixed(2)}, exchange rate: ${this.ExchangeRate}`
+                    }
+                }
+
+                let amount = new TMoney(100, 40)
+                log(amount)
+
+                let addedUah = 123
+                amount.addUAH(addedUah)
+                log(`До рахунку додано ${addedUah} гривень. Поточний баланс ${amount.SumUSD.toFixed(2)} USD`)
+
+                let withdrawedUah = 235
+                amount.withdrawUAH(withdrawedUah)
+                log(`З рахунку знято ${withdrawedUah} гривень. Поточний баланс ${amount.SumUSD.toFixed(2)} USD`)
+
+                log(`Курс USD, при якуму сума в гривні збільшиться на 100: ${amount.getNewRate().toFixed(2)}`)
+                log(`Сума в гривні при поточному курсі ${amount.SumUSD * amount.ExchangeRate}`)
+                log(`Сума в гривні при новому курсі ${amount.SumUSD * amount.getNewRate()}`)
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html> 
