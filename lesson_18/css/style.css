@@ -145,12 +145,14 @@ td img {
     color: #493481;
 }
 
-.violet-form input {
+.violet-form input, 
+.violet-form select  {
     height: 25px;
     border-radius: 10px;
     margin: 5px;
     padding: 5px;
 }
+
 
 .violet-form button {
     border: 3px solid #493481;

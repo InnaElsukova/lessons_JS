@@ -18,14 +18,76 @@
     <main class="page">
         <div class="page__container">
             <p>
-                Користувач задає кількість оцінок і натискає на кнопку «get table». В результаті формується таблиця з input, куди
-                користувач вводить оцінки. Після цього натискає на кнопку “get sum” і знаходить середнє значення.
+                Подорож складається з 3 етапів. На кожному етапі користувач може вибрати один з видів транспорту (авто, автобус, літак -
+                випадаючий список), харчування (сніданок, обід, вечеря – checkbоx) та одного з 3-х гідів(використати - radio buttons).
+                Ціни визначте самі. Підрахувати загальну вартість.
             </p>
-            
+            <div style="width: 200px" class="violet-form">
+                <label for="transport">Вид транспорту</label>
+                <select name="transport" id="transport">
+                    <option value="200">Авто</option>
+                    <option value="100">Автобус</option>
+                    <option value="500">Літак</option>
+                </select>
+                
+                <span>Харчування</span> <br>
+                
+                <input type="checkbox" id="breakfest" name="breakfest" value="20">
+                <label for="breakfest">Сніданок 20 грн</label><br>
+
+                <input type="checkbox" id="lunch" name="lunch" value="50">
+                <label for="lunch">Обід 50 грн</label><br>
+
+                <input type="checkbox" id="dinner" name="dinner" value="30">
+                <label for="dinner">Вечеря 30 грн</label><br>
+
+                <fieldset>
+                    <legend>Оберіть гіда</legend>
+                    <div>
+                        <input type="radio" id="ivan" name="gid" value="10"/>
+                        <label for="ivan">Іван 10 грн</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="semen" name="gid" value="50" />
+                        <label for="semen">Семен 50 грн</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="petro" name="gid" value="100" />
+                        <label for="petro">Петро 100 грн</label>
+                    </div>
+                </fieldset>
+
+                <button id="calc">Розрахувати</button><br>
+                <span>Вартість </span>
+                <span id = "sum">__</span>
+                <span>грн </span>
+
+            </div>
         </div>
     </main>     
     <script>
-        
+        function calcCollectionSum(collection) {
+            let sum = 0
+            for (const item of collection) {
+                if (item.checked)
+                    sum += parseInt(item.value)
+            }
+            return sum
+        }
+        function calcSum() {
+            let sum = 0
+            sum += parseInt(document.getElementById('transport').value)
+
+            // sum +=calcCollectionSum(document.querySelectorAll('input[type=checkbox]'))
+            // sum += calcCollectionSum(document.querySelectorAll('input[type=radio]'))
+            
+            // одна функція рахує суму по всім інпутам і чекбоксам і радіо
+            sum += calcCollectionSum(document.querySelectorAll('input'))
+
+            document.getElementById('sum').innerText = sum
+        }
+        const calcBtn = document.getElementById('calc')
+        calcBtn.onclick = calcSum
     </script>
 </body>
 </html>
