@@ -1,0 +1,64 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 3</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Створити клас Нагадувач. Кожні вказані кількості секунд (використати setInterval) програма нагадує про якусь подію (це
+                просто текст) і також виводиться порядковий номер скільки раз вже нагадування було. Зробити так, щоб неможна було
+                зробити одночасно декілька об’єктів-нагадувачів. Методи зупинки таймера, метод зміни повідомлення без зупинки таймера.
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                class Reminder {
+                    static reminderRef
+                    static counter = 1
+                    // static remindId
+                    static message = 'Do something'
+                    constructor(sec) {
+                        if(Reminder.reminderRef)
+                            return Reminder.reminderRef
+                        this.timeout = sec
+                        this.remindId = setInterval(() => {
+                            alert(`${Reminder.message} counter = ${Reminder.counter}`)
+                            Reminder.counter++
+                        }, this.timeout)
+                        Reminder.reminderRef = this
+                    }
+
+                    remindStop() {
+                        clearInterval(this.remindId)
+                    }
+
+                    changeMessage(newMessage) {
+                        Reminder.message = newMessage
+                    }
+
+                }
+ 
+                const firstReminder = new Reminder(3000)
+                setTimeout(() => firstReminder.changeMessage('Another message'), 8000)
+                // 2й ремайндер, який не буде створено                
+                const secondReminder = new Reminder(1000)
+                // через 15 секунд зупиняємо таймер
+                setTimeout(() => firstReminder.remindStop(), 15000)
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

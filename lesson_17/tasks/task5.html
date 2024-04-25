@@ -1,0 +1,200 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 5</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        img {
+            border: 3px solid black;
+            border-radius: 5px;
+        }
+
+        img:hover {
+            border: 3px solid red;
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 5</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Особиста бібліотека. Картотека домашньої бібліотеки: дані книги (автори (піб, рік народження, короткий опис), назва
+                книги, жанр, видавництво (назва, реєстраційний номер, рік засування)). Реалізувати розділи бібліотеки (спеціальна
+                література, хобі, домашнє господарство і т.д.), походження книги і наявність на даний час. Організувати
+                додавання/вилучення книг та вибір книг за назвою, за ПІБ автора, за видавництвом.
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                class Author {
+                    constructor(fullName, bornYear, description) {
+                        this.fullName = fullName
+                        this.bornYear = bornYear
+                        this.description = description
+                    }
+
+                    toString() {
+                        return `${this.fullName}, ${this.bornYear} р.н. (${this.description})`
+                    }
+                }
+
+                class Publisher {
+                    constructor(name, number, estYear) {
+                        this.name = name
+                        this.number = number
+                        this.estYear = estYear
+                    }
+
+                    toString() {
+                        return `Видавництво ${this.name}, засновано y ${this.estYear} p. (${this.number})`
+                    }
+                }
+
+                class Book {
+                    constructor(autors, title, genre, publisher, avalible) {
+                        this.autors = autors
+                        this.title = title
+                        this.genre = genre
+                        this.publisher = publisher
+                        this.avalible = avalible
+                    }
+
+                    toString () {
+                        let authorsNames = ''
+                        for(const author of this.autors) {
+                            authorsNames += `${author.fullName} (${author.bornYear})` 
+                        }
+                        let avalible = this.avalible ? 'доступна' : 'не доступна'
+                        return `${this.title}. Aвтор(и) ${authorsNames}, жанр ${this.genre} видавництво ${this.publisher}, ${avalible}`
+                    }
+                }
+
+                class Library {
+                    constructor(booksList) {
+                        this.booksList = booksList
+                    }
+
+                    addBook(book) {
+                        this.booksList.push(book)
+                    }
+
+                    deleteBook(bookTitle) {
+                        let ind = this.booksList.findIndex(book => book.title === bookTitle)
+                        this.booksList.splice(ind, 1)
+                    }
+
+                    findTitle (title) {
+                        return this.booksList.filter(
+                            book => book.title === title
+                        )
+                    }
+
+                    findAuthor(authorName) {
+                        return  this.booksList.filter(
+                            book => {
+                                for(let author of book.autors)
+                                    if(author.fullName === authorName)
+                                        return book
+                            }
+                        )
+                    }
+
+                    findPublisher(publisher){
+                        return this.booksList.filter(
+                            book => book.publisher.name === publisher
+                        )
+                    }
+
+                    toString() {
+                        let mes = ''
+                        let cnt = 1
+                        for(const book of this.booksList) {
+                            let authors = ''
+                            for(const author of book.autors) {
+                                authors += `${author.fullName} (${author.bornYear}); `
+                            }
+                            let avalible = book.avalible ? 'доступна' : 'не доступна'
+                            mes += `${cnt}. Назва ${book.title} автор(и): ${authors}<br>- жанр: ${book.genre}<br>-видавництво: ${book.publisher}<br>-${avalible}<br><br>`
+                            cnt++
+                        }
+                        return mes
+                    }
+                }
+
+                const booksList = [
+                    new Book(
+                        [{ fullName: 'Джоан Роулінг', bornYear: 1963, description: 'інфо про автора' },
+                        { fullName: 'Джоан', bornYear: 1983, description: 'інфо про Джоан' }],
+                        'Гаррі Поттер та в"язень Азкабану', 'Фентезі', new Publisher('Старий лев', 12378, 2001), true),
+                    new Book(
+                        [{ fullName: 'Джоан Роулінг', bornYear: 1963, description: 'інфо про автора' },
+                        { fullName: 'Джоан', bornYear: 1983, description: 'інфо про Джоан' }],
+                        'Гаррі Поттер та кубок', 'Фентезі', new Publisher('Старий лев', 12378, 2001), true),
+                    new Book(
+                        [{ fullName: 'Роальд Дал', bornYear: 1969, description: 'інфо про автора' },
+                        { fullName: 'соавтор', bornYear: 1980, description: 'інфо' }],
+                        'Чарлі та шоколадна фабрика', 'Фентезі', new Publisher('Старий лев', 12378, 2001), true),
+                    new Book(
+                        [{ fullName: 'Юлія Данчук', bornYear: 1995, description: 'інфо про Юлію' }],
+                        'Я обираю хобі. Путівник підлітка step by step', 'Хобі', new Publisher('Ранок', 8888, 2004), false),
+                    new Book(
+                        [{ fullName: 'Ґжеґож Касдепке', bornYear: 1960, description: 'Ґжеґож Касдепке' }],
+                        'Зачіпки детектива Нишпорки', 'Детектив', new Publisher('Ранок', 8888, 2004), true),
+                    new Book(
+                        [{ fullName: 'Катрін Якобсдоттір', bornYear: 2001, description: 'інфо про автора' },
+                        { fullName: 'Рагнар Йонассон', bornYear: 1979, description: 'інфо про Рагнар' }],
+                        'Рейкявік.Нордичний детектив', 'Детектив', new Publisher('Основа', 11118, 2011), true)
+                ]
+
+                let library = new Library(booksList)
+                document.write('Створена бібліотека:<br>')
+                document.write(library)
+                document.write('------------------------------------------------------------------------<br>')
+                const newBook = new Book(
+                        [{ fullName: 'Андрій Кокотюха', bornYear: 1975, description: 'інфо про автора' }],
+                        'Таємниця зниклих зайців', 'Детектив', new Publisher('Старий лев', 12378, 2001), true
+                    )
+                library.addBook(newBook)
+                document.write(`Додана книга <strong>"${newBook.title}"</strong>. Книги бібліотеки:<br>`)
+                document.write(library)
+                document.write('------------------------------------------------------------------------<br>')
+                
+                const titleToDel = 'Чарлі та шоколадна фабрика'
+                library.deleteBook(titleToDel)
+                document.write(`Видалена книга <strong>"${titleToDel}"</strong>. Книги бібліотеки:<br>`)
+                document.write(library)
+                document.write('------------------------------------------------------------------------<br>')
+
+                const titleToFind = 'Рейкявік.Нордичний детектив'
+                let booksWithTitle = new Library(library.findTitle(titleToFind))
+                document.write(`Знайдено ${booksWithTitle.booksList.length} книга з назвою <strong>"${titleToFind}"</strong><br>:`)
+                document.write(booksWithTitle)
+                document.write('------------------------------------------------------------------------<br>')
+
+                const authorToFind = 'Джоан Роулінг'
+                let booksWithAuthor = new Library(library.findAuthor(authorToFind))
+                document.write(`Знайдено ${booksWithAuthor.booksList.length} книги з автором <strong>${authorToFind}</strong>:<br>`)
+                document.write(booksWithAuthor)
+                document.write('------------------------------------------------------------------------<br>')
+
+                const publisherToFind = 'Старий лев'
+                const booksWithPublisher = new Library(library.findPublisher(publisherToFind))
+                document.write(`Знайдено ${booksWithPublisher.booksList.length} книги видавництва <strong>"${publisherToFind}"</strong>:<br>`)
+                document.write(booksWithPublisher)
+                document.write('------------------------------------------------------------------------<br>')
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html>

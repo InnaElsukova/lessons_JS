@@ -1,0 +1,156 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        img {
+            border: 3px solid black;
+            border-radius: 5px;
+        }
+
+        img:hover {
+            border: 3px solid red;
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 4</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Склад. База товарів, які зберігаються на складі: назва товару, одиниця виміру, кількість, фірма виробник (назва,
+                реєстраційний номер). Організувати реєстрацію/відвантаження товарів, фільтрація за назвою товару, фільтрація за назвою
+                фірми
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                class Goods {
+                    constructor(goodsInfo) { //name, unit, count, firm
+                        Object.assign(this, goodsInfo)
+                    }
+
+                    toString() {
+                        return `name: ${this.name}, unit: ${this.unit}, count: ${this.count} , firm: ${this.firm.Name} (${this.firm.Number})`
+                    }
+                }
+
+                class goodStore {
+                    constructor(goodsList) {
+                        this.goodsList = goodsList
+                    }
+
+                     //реєстрацію/відвантаження товарів, 
+                    addGoods (goods) {
+                        this.goodsList.push(goods)
+                    }
+
+                    delGoods(goodsName) {
+                        let ind = this.goodsList.findIndex(item => item.name === goodsName)
+                        this.goodsList.splice(ind, 1)
+                    }
+                     
+                    //фільтрація за назвою товару, 
+                    filterGoods(goodsName) {
+                        return this.goodsList.filter(
+                            item => item.name === goodsName
+                        )    
+                    }
+                    
+                    //фільтрація за назвою фірми
+                    filterFirm(firmName) {
+                        return this.goodsList.filter(
+                            item => item.firm.Name === firmName
+                        )
+                    }
+
+                    toString() {
+                       let mes = ''
+                        for (const good of goodsList) {
+                            mes += `Товар: ${good.name}, од.виміру: ${good.unit}, к-ть: ${good.count} , ${good.firm} <br>`
+                        }
+                        return mes
+                    }
+                }
+
+                class Firm {
+                    #name
+                    #number
+                    get Name() {
+                        return this.#name
+                    }
+                    set Name(name) {
+                        if(name.length === 0)
+                            throw new Error('Назва фірми не може бути пустою')
+                        this.#name = name
+                    }
+
+                    get Number() {
+                        return this.#number
+                    }
+                    set Number(num) {
+                        if(isNaN(num))
+                            throw new Error('Реєстраційний номер фірми має бути числом')
+                        this.#number = num
+                    }
+
+                    constructor(name, num) {
+                        this.Name = name
+                        this.Number = num
+                    }
+
+                    toString() {
+                        return `фірма "${this.Name}",  реєстраційний номер ${this.Number}`
+                    }
+                }
+
+                let meat = new Firm('Рога та Копита', 123)
+                let beauty = new Firm ('Красотка', 11111)
+                let cancelary = new Firm('Канцелярія', 54321)
+
+                let goodsList = [
+                    new Goods({ name: 'Сало', unit: 'кг', count: '10,2', firm: meat }),
+                    new Goods({ name: 'Яловичина', unit: 'кг', count: '102', firm: meat}),
+                    new Goods({ name: 'Парфуми', unit: 'мл', count: '30', firm: beauty}),
+                    new Goods({ name: 'Шампунь', unit: 'мл', count: '200', firm:  beauty}),
+                    new Goods({ name: 'Олівець', unit: 'шт', count: '3', firm: cancelary})
+                ]
+
+                let newStore = new goodStore(goodsList)
+                document.write('База товарів, які зберігаються на складі')
+                document.write(newStore)
+
+                const pen = new Goods({ name: 'Ручка', unit: 'шт', count: '13', firm: cancelary })
+                newStore.addGoods(pen)
+                document.write(` <br>Додано новий товар ${pen.name}. Перелік товарів:<br>`)
+                document.write(newStore)
+
+                const goodsForDel = 'Шампунь'
+                newStore.delGoods(goodsForDel)
+                document.write(`<br>Видалено товар ${goodsForDel}. Перелік товарів:<br>`)
+                document.write(newStore)
+
+                const goodsForFindName = 'Яловичина'
+                document.write(`<br>Знайдено товар ${goodsForFindName}:<br>`)
+                document.write(newStore.filterGoods(goodsForFindName))
+
+                const firmName = 'Рога та Копита'
+                document.write(` <br>Знайдено товари фірми ${firmName}:<br>`)
+                document.write(newStore.filterFirm(firmName))
+
+
+           </script>
+        </div>
+    </main>     
+
+</body>
+</html>

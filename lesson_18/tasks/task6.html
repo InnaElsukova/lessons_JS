@@ -1,0 +1,86 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 6</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        table {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 6</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Користувач задає кількість оцінок і натискає на кнопку «get table». В результаті формується таблиця з input, куди
+                користувач вводить оцінки. Після цього натискає на кнопку “get sum” і знаходить середнє значення.
+            </p>
+            <div class="violet-form">
+                <label for="scoresCount"> Scores count</label>
+                <input type="number" name="scoresCount" value="4">
+                <button id="generate">Get table</button>
+
+            </div>
+            
+        </div>
+    </main>     
+    <script>
+        function checkNumber(num) {
+            if (isNaN(num) || num < 1)
+                throw new Error('Значення має бути більше 0')
+        }
+
+        function getAverage() {
+            let inputList = document.getElementsByClassName('score')
+            let sum = 0, count = 0
+            for(item of inputList) {
+                let val = parseInt(item.value)
+                checkNumber(val)
+                sum += val
+                count++
+            }
+            const spanEl = document.createElement('span')
+            spanEl.innerText = `Average value ${sum / count}`
+            spanEl.style.fontWeight = 600
+            document.getElementsByClassName('violet-form')[0].append(spanEl)
+        }
+
+        function generateTable() {
+            const form = document.getElementsByClassName('violet-form')[0]
+            const cellCount = parseInt(document.getElementsByName('scoresCount')[0].value)
+            checkNumber(cellCount)
+            const tableEl = document.createElement('table')
+            const trEl = document.createElement('tr')
+            for(let i = 0; i < cellCount; i++) {
+                const tdEl = document.createElement('td')
+                const inputEl = document.createElement('input')
+                inputEl.className = 'score'
+                tdEl.append(inputEl)
+                trEl.append(tdEl)
+            }
+            tableEl.append(trEl)
+            form.append(tableEl)
+
+            const btnCalc = document.createElement('button')
+            btnCalc.innerText = 'Get average'
+            form.append(btnCalc)
+            
+            btnCalc.onclick = getAverage
+        }
+
+        const btnGen = document.getElementById('generate')
+        btnGen.onclick = generateTable
+
+    </script>
+</body>
+</html>

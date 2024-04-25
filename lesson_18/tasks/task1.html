@@ -1,0 +1,121 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+      .calc {
+      border: 3px solid #493481;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 20px;
+      width: 340px;
+      color: #493481;
+      }
+
+      .calc * {
+          display: inline-block;
+      }
+
+      .calc label {
+          width: 150px;
+          font-weight: 600;
+      }
+
+      input {
+          height: 25px;
+          border-radius: 10px;
+          margin-block: 5px;
+          padding: 5px;
+      }
+        button {
+      width: 50px;
+      margin: 14px;
+      border: inherit;
+      border-radius: 10px;
+      background-color: #8870c6;
+      color: white;
+      }
+
+      button:hover {
+          border-color: white;
+      }
+    </style>
+</head>
+<body>
+  
+   <div class="wrapper">
+        <header class="header">
+            <div class="header__container"> 
+                <h1>Задача 1</h1>
+            </div>
+        </header>   
+        <main class="page">
+            <div class="page__container">
+                <p>
+                    Розробити калькулятор
+                </p>
+                <div class="calc">
+                  <label for="firstNum">First number</label>
+                  <input type="number" name="firstNum" id="first" value="2">
+
+                  <label for="secondNum">Second number</label>
+                  <input type="number" name="secondtNum" id="second"  value="3">
+
+                  <button id="add">+</button>
+                  <button id="sub">-</button>
+                  <button id="prod">*</button>
+                  <button id="div">/</button>
+                  
+                  <label for="res">Result</label>
+                  <input type="number" name="res" id="res">
+                </div>
+            </div>
+        </main>     
+    </div>
+    <script>
+      function getSum() {
+        const input1 = parseFloat(document.getElementById('first').value)
+        const input2 = parseFloat(document.getElementById('second').value)
+        const sum = input1 + input2
+        document.getElementById('res').value = sum
+      }
+
+      function getSub() {
+          const input1 = parseFloat(document.getElementById('first').value)
+          const input2 = parseFloat(document.getElementById('second').value)
+          const sum = input1 - input2
+          document.getElementById('res').value = sum
+      }
+
+      function getProd() {
+          const input1 = parseFloat(document.getElementById('first').value)
+          const input2 = parseFloat(document.getElementById('second').value)
+          const sum = input1 * input2
+          document.getElementById('res').value = sum
+      }
+
+        function getDiv() {
+          const input1 = parseFloat(document.getElementById('first').value)
+          const input2 = parseFloat(document.getElementById('second').value)
+          const div = input1 / input2
+          document.getElementById('res').value = div
+        }
+
+      const btnAdd = document.getElementById('add')
+      btnAdd.onclick = getSum
+
+      const btnSub = document.getElementById('sub')
+      btnSub.onclick = getSub
+
+      const btnProd = document.getElementById('prod')
+      btnProd.onclick = getProd
+
+      const btnDiv = document.getElementById('div')
+      btnDiv.onclick = getDiv
+
+    </script>
+</body>
+</html> 

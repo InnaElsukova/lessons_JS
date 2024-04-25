@@ -1,0 +1,98 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .calc {
+            border: 3px solid #493481;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 20px;
+            width: 340px;
+            color: #493481;
+        }
+
+        .calc * {
+            display: inline-block;
+        }
+
+        .calc label {
+            width: 150px;
+            font-weight: 600;
+        }
+        input {
+            height: 25px;
+            border-radius: 10px;
+            margin-block: 5px;
+            padding: 5px;
+        }
+
+        button {
+            width: 50px;
+            margin: 14px;
+            border: inherit;
+            border-radius: 10px;
+            background-color: #8870c6;
+            color: white;
+        }
+        #convert {
+            width: 310px;
+        }
+        button:hover {
+            border-color: white;
+        } 
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 2</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Задача 2. Зробити конвертер валют (курси валют – константи у скрипті)
+            </p>
+            <div class="calc">
+                <label for="sumUah">Сума в грн</label>
+                <input type="number" name="sumUah" id="uah" value="1000">
+                
+                <button id="convert">Конвертувати</button>
+                
+                <label for="sumEur">Сума EUR</label>
+                <input type="number" name="sumEur" id="eur">
+
+                <label for="sumUsd">Сума USD</label>
+                <input type="number" name="sumUsd" id="usd">
+            </div>
+        </div>
+    </main>     
+    <script>
+        
+        function getSumEur(uah) {
+            const rateEur = 42
+            document.getElementById('eur').value = (uah / rateEur).toFixed(2)
+        }
+
+        function getSumUsd(uah) {
+                const rateUsd = 39
+                document.getElementById('usd').value = (uah / rateUsd).toFixed(2)
+        }
+
+        function convert() {
+            const uah = parseFloat(document.getElementById('uah').value)
+            getSumEur(uah)
+            getSumUsd(uah)
+        }
+        
+        let convertBtn = document.getElementById('convert')
+        convertBtn.onclick = convert
+    </script>
+</body>
+</html> 

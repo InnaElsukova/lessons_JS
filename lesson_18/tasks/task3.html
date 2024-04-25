@@ -1,0 +1,85 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .calc {
+            border: 3px solid #493481;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 20px;
+            width: 340px;
+            color: #493481;
+        }
+    
+        .calc * {
+            display: inline-block;
+        }
+    
+        .calc label {
+            width: 150px;
+            font-weight: 600;
+        }
+    
+        input {
+            height: 25px;
+            border-radius: 10px;
+            margin-block: 5px;
+            padding: 5px;
+        }
+    
+        button {
+            width: 50px;
+            margin: 14px;
+            border: inherit;
+            border-radius: 10px;
+            background-color: #8870c6;
+            color: white;
+        }
+        #convert {
+            width: 310px;
+        }    
+        button:hover {
+            border-color: white;
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 3</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Користувач задає рік народження. Визначити кількість років користувача.
+            </p>
+            <div class="calc">
+                <label for="born">Рік народження</label>
+                <input type="number" name="born" id="born" value="2010">
+            
+                <button id="convert">Визначити вік</button>
+            
+                <label for="yo">Вік (років)</label>
+                <input type="number" name="yo" id="yo" disabled>
+            
+            </div>
+        </div>
+    </main>     
+    <script>
+        function getYears() {
+            const bornYear = parseInt(document.getElementById('born').value)
+            const currentYear = (new Date()).getFullYear()
+            document.getElementById('yo').value = currentYear - bornYear
+        }
+        const btnYo = document.getElementById('convert')
+        btnYo.onclick = getYears
+    </script>
+</body>
+</html>

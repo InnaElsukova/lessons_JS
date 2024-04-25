@@ -1,0 +1,84 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 2</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Створити службове авто (водій, марка, номер). Створити клас таким чином, щоб можна було створити тільки один екземпляр
+                цього класу.
+            </p>
+            
+            <script src="../js/script.js"></script>
+            <script>
+                class Auto {
+                    static autoRef
+                    #driver
+                    #model
+                    #number
+                    get Driver() {
+                        return this.#driver
+                    }
+                    set Driver(driver) {
+                        if(driver.length === 0)
+                            throw new Error('Ім"я не може пути порожнім')
+                        this.#driver = driver
+                    }
+
+                    get Model() {
+                        return this.#model
+                    }
+                    set Model(model) {
+                        if(model.length === 0)
+                            throw new Error('Модель не може бути порожньою')
+                        this.#model = model
+                    }
+
+                    get Number() {
+                        return this.#number
+                    }
+                    set Number(number) {
+                        if(number.length === 0)
+                            throw new Error('Номер не може бути порожнім')
+                        this.#number = number
+                    }
+
+                    constructor (driver, model, number) {
+                        if(Auto.autoRef)
+                            return Auto.autoRef
+                        this.Driver = driver
+                        this.Model = model
+                        this.Number = number
+                        Auto.autoRef = this
+                    }
+
+                    toString() {
+                        return `${this.Driver} - ${this.Model} (${this.Number})`
+                    }
+                }
+
+                let driver = 'Ivan', model = 'Mazda', number = 'AA1122OO'
+                const auto = new Auto(driver, model, number)
+                log(`Створено клас Singleton з параметрами: ${driver}, ${model}, ${number} клас: ${auto}`)
+
+                driver = 'Petro'
+                log(`Спроба змінити водія: ${driver}, ${model}, ${number}  клас: ${auto}`)
+
+            </script>
+        </div>
+    </main>     
+
+</body>
+</html> 

@@ -1,0 +1,65 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+      td {
+        width: 40px;
+        height: 40px;
+      }
+      td img {
+        width: 37px;
+      }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header__container"> 
+                <h1>Задача 1</h1>
+            </div>
+        </header>   
+        <main class="page">
+            <div class="page__container">
+                <p>
+                    Створити клас, що дозволяє виконувати такі операції над масивами: знаходження кількості додатних, кількості від’ємних,
+                    кількість входжень деякого числа (статичні методи)
+                </p>
+
+                <script src="../js/script.js"></script>
+                <script>
+                    class ArrOperations {
+
+                      static getCountPositiveItems (randArr) {
+                        return randArr.reduce((prevCnt, it) =>  it > 0 ? prevCnt + 1 : prevCnt ,0)
+                      }
+
+                      static getCountNegativeItems(randArr) {
+                        return randArr.filter(it => it < 0).length
+                      }
+
+                      static getCountNum(randArr, num) {
+                        let cnt = 0
+                        for(const it of randArr) {
+                          if(it === num)
+                            cnt++
+                        }
+                        return cnt
+                      }
+                    }
+                    
+                    const randArr = generateRandomArray(-3, 3, 10)
+                    log(`Згенеровано масив: ${randArr}`)
+                    log(`Кількість додатніх ел-тів: ${ArrOperations.getCountPositiveItems(randArr)}`)
+                    log(`Кількість від'ємних ел-тів: ${ArrOperations.getCountNegativeItems(randArr)}`)
+                    let num = 2
+                    log(`Кількість входжень числа ${num}: ${ArrOperations.getCountNum(randArr, num)}`)
+                </script>
+            </div>
+        </main>     
+    </div>
+</body>
+</html> 

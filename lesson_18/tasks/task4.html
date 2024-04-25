@@ -1,0 +1,52 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 4</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Наперед задано у скрипті масив зі списком бажань. Після завантаження сторінки випадковим чином вибираються 3 і
+                відображаються у окремих div (їх треба створити і додати на сторінку)
+            </p>
+            
+    
+        </div>
+    </main>     
+    <script>
+        const wishList = ['Бажаю миру', 'Бажаю здоров"я', 'Бажаю любові', 'Бажаю гарних друзів', 'Бажаю спокою']
+        const countWishes = 3
+        function getRandomWishes(wishList, count) {
+            let randWishes = []
+            for(let i=0; i < count; i++) {
+                let randIndex = 0 + Math.floor(Math.random()*wishList.length)
+                randWishes.push(wishList[randIndex])
+                wishList.splice(randIndex, 1)
+            }
+            return randWishes
+        }
+
+        let randWishes = getRandomWishes(wishList, countWishes)
+        for(wish of randWishes) {
+            const divEl = document.createElement('div')
+            divEl.innerText = wish
+            divEl.style.border = '3px solid #493481'
+            divEl.style.borderRadius = '10px'
+            divEl.style.margin = '10px'
+            divEl.style.padding = '10px'
+            document.body.append(divEl)
+        }
+    </script>
+</body>
+</html>
