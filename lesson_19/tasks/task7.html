@@ -32,22 +32,23 @@
                 вниз (у setInterval викликати метод, у якому додавати крок до top). Як тільки сніжинка досягає нижньої частини екрану
                 (top>maxTop) вона знову повинна з’явитись у верхній частині екрану (top=0).
             </p>
-            <!-- <img src="img/snowflake.svg" alt="snowflake"> -->
         </div>
     </main>     
     <script>
+       function getRandom(min, max) {
+            return min + Math.floor(Math.random() * (max - min + 1))
+        }
+
        class Snowflake {
         constructor(minStep, maxStep) {
             this.minStep = minStep
             this.maxStep = maxStep
             this.el = this.render()
         }
-        getRandomStep(min, max) {
-            return min + Math.floor(Math.random() * (max - min + 1))
-        }
+        
         jump() {
-            const stepLeft = this.getRandomStep(-this.maxStep, this.maxStep)
-            const stepTop = this.getRandomStep(this.minStep, this.maxStep)
+            const stepLeft = getRandom(-this.maxStep, this.maxStep)
+            const stepTop = getRandom(this.minStep, this.maxStep)
             const screenHeight = window.innerHeight
             let newTop = parseInt(this.el.style.top) + stepTop
             if(newTop > screenHeight) 
@@ -66,7 +67,8 @@
         render() {
             const snowflake = document.createElement('img')
             snowflake.setAttribute('src','img/snowflake.svg')
-            snowflake.style.left = '0'
+            let randomLeft = getRandom(0, window.innerWidth)
+            snowflake.style.left = `${randomLeft}px`
             snowflake.style.top = '100px'
             document.body.append(snowflake)
             setInterval(() => this.jump(), 500)
@@ -74,7 +76,7 @@
         }
        }
 
-       const snowflake = new Snowflake(15, 70)
+       setInterval(() => new Snowflake(getRandom(10,30), getRandom(50, 90)), 1000)
     </script>
 </body>
 </html>
