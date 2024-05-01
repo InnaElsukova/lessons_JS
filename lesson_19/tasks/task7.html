@@ -1,0 +1,82 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 7</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .page {
+            position: relative;
+        }
+        img {
+            width: 50px;
+            position: absolute;
+            top: 100px;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 7</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Відобразити падаючий сніг. Сніжинка з’являється у верхній частині екрану (top =0) і з випадковою швидкістю рухається
+                вниз (у setInterval викликати метод, у якому додавати крок до top). Як тільки сніжинка досягає нижньої частини екрану
+                (top>maxTop) вона знову повинна з’явитись у верхній частині екрану (top=0).
+            </p>
+            <!-- <img src="img/snowflake.svg" alt="snowflake"> -->
+        </div>
+    </main>     
+    <script>
+       class Snowflake {
+        constructor(minStep, maxStep) {
+            this.minStep = minStep
+            this.maxStep = maxStep
+            this.el = this.render()
+        }
+        getRandomStep(min, max) {
+            return min + Math.floor(Math.random() * (max - min + 1))
+        }
+        jump() {
+            const stepLeft = this.getRandomStep(-this.maxStep, this.maxStep)
+            const stepTop = this.getRandomStep(this.minStep, this.maxStep)
+            // this.el.style.left = `${this.el.style.left + stepLeft}px`
+            // this.el.style.top = `${this.el.style.right + stepTop}px`
+            const screenHeight = window.innerHeight
+            let newTop = parseInt(this.el.style.top) + stepTop
+            if(newTop > screenHeight) 
+                newTop = 100
+            this.el.style.top = `${newTop}px`
+            
+            const screenWidth = window.innerWidth
+            let newLeft = parseInt(this.el.style.left) + stepLeft
+            if(newLeft < 0) 
+                newLeft = screenWidth - 50
+            if(newLeft > screenWidth)
+                newLeft = 50
+            this.el.style.left = `${newLeft}px`
+            
+        }
+        render() {
+            const snowflake = document.createElement('img')
+            snowflake.setAttribute('src','img/snowflake.svg')
+            snowflake.style.left = '0'
+            snowflake.style.top = '100px'
+            document.body.append(snowflake)
+            setInterval(this.jump.bind(this), 500)
+            return snowflake
+        }
+       }
+
+       const snowflake = new Snowflake(15, 70)
+    </script>
+</body>
+</html>

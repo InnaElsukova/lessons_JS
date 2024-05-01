@@ -1,0 +1,113 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 6</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .violet-form {
+            display: flex;
+            gap: 30px;
+        }
+        .violet-form img {
+            width: 30px;
+        }
+        .violet-form button {
+            padding: 3px 10px 1px;
+        }
+        #general-list,
+        #selected-list {
+            /* display: inline-block; */
+            margin: 10px;
+            padding: 10px;
+            width: 300px;
+            height: 500px;
+            border: 1px solid black;
+        }
+
+        .sportsman {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #493481;
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 6</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Дано список спортсменів. Потрібно сформувати список тих, які будуть брати участь у змаганні. При цьому є два стовпці. В
+                одному відображені всі спортсмени, в іншому – список тих, хто був вибраний. При натисканні на зелену стрілку спортсмен
+                переміщається у список для змагань. При натисканні на червону стрілку спортсмен переміщається у загальний список.
+            </p>
+            <div class="violet-form">
+                <div id="general-list">
+                    <div class="sportsman">
+                        <span>John Depp</span>
+                        <button><img src="img/arrow_green.svg" alt="->"></button>
+                    </div>
+                    <div class="sportsman">
+                        <span>Sara Wik</span>
+                        <button><img src="img/arrow_green.svg" alt="->"></button>
+                    </div>
+                    <div class="sportsman">
+                        <span>Den Miro</span>
+                        <button><img src="img/arrow_green.svg" alt="->"></button>
+                    </div>
+                    <div class="sportsman">
+                        <span>Alan Woo</span>
+                        <button><img src="img/arrow_green.svg" alt="->"></button>
+                    </div>
+                    <div class="sportsman">
+                        <span>Olga Sich</span>
+                        <button><img src="img/arrow_green.svg" alt="->"></button>
+                    </div>
+                    <div class="sportsman">
+                        <span>Ivan Hal</span>
+                        <button><img src="img/arrow_green.svg" alt="->"></button>
+                    </div>
+                </div>
+                <div id = "selected-list">
+
+                </div>
+
+            </div>
+            
+        </div>
+    </main>     
+    <script>
+        function AddItem(item, parentContainer) {
+            const greenArrow = 'img/arrow_green.svg'
+            const redArrow = 'img/arrow_red.svg'
+            const imgArrow = item.getElementsByTagName('img')[0]
+            const picturePath = imgArrow.getAttribute('src') === greenArrow ? redArrow : greenArrow
+            imgArrow.setAttribute('src', picturePath)
+            parentContainer.append(item)
+            
+        }
+        function moveItem(event, parentContainer) {
+            // console.log(event.target.closest('[id*="-list"]'))
+            if(event.target.tagName === 'IMG' || event.target.tagName === 'BUTTON') {
+                let movingItem = event.target.closest('.sportsman')
+                AddItem(movingItem.cloneNode(true), parentContainer)
+                event.target.closest('.sportsman').remove()
+            }
+        }
+
+        const genList = document.getElementById('general-list')
+        const selList = document.getElementById('selected-list')
+        genList.onclick = (event) => moveItem(event, selList)
+        selList.onclick = (event) => moveItem(event, genList)
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+    <link rel="stylesheet" href="../css/style.css">
+ 
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 2</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Дано 5 елементів input. При введенні значення у якийсь із них необхідно автоматично заповнювати інші (усі попередні у
+                спадному порядку(кожен попередній має значення на 1 менше за наступний), усі наступні на 1 більше (кожен наступне на 1
+                більше за попереднього)
+            </p>
+            <div style="width: 250px" class="violet-form">
+                <input type="number" class="a1">
+                <input type="number" class="a2">
+                <input type="number" class="a3">
+                <input type="number" class="a4">
+                <input type="number" class="a5">
+            </div>
+        </div>
+    </main>     
+    <script>
+        function fillInput() {
+            const thisInput = this
+            let incInput = thisInput
+            let cnt = 0
+            while(incInput.nextElementSibling != null) {
+                incInput.nextElementSibling.value = parseInt(incInput.value) + 1
+                incInput = incInput.nextElementSibling
+            }
+            let decInput = thisInput
+            while(decInput.nextElementSibling != null) {
+                decInput.previousElementSibling.value = parseInt(decInput.value) - 1
+                decInput = decInput.previousElementSibling
+            } 
+        }
+        const inputList = document.querySelectorAll('input') 
+        for(inputEl of inputList) {
+            inputEl.oninput = fillInput
+        }       
+    </script>
+</body>
+</html> 

@@ -1,0 +1,89 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        li {
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 3</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Дано 5 випадковим чином згенерованих нумерованих списків з рандомними числами (кількість елементів у списку випадкова
+                від 1 до 10, елементи випадкові – від 1 до 100). При натисненні на кнопку нумеровані списки з парною кількістю елементів
+                зафарбувати у зелений колір, інші у червоний.
+            </p>
+            <div class="violet-form">
+                <button>Color lists</button>
+            </div>
+
+        </div>
+    </main>     
+    <script>
+        function getRandom (min = 1, max = 100) {
+            return min + Math.floor(Math.random() *(max - min + 1))
+        }
+        function generateList() {
+            const olEl = document.createElement('ol')
+            const countEl = getRandom(1, 10)
+            let numLi = 0
+            while(numLi < countEl) {
+                const liEl = document.createElement('li')
+                liEl.innerText = getRandom(1, 100)
+                olEl.append(liEl)
+                numLi++
+            }
+
+            document.getElementsByClassName('violet-form')[0].append(olEl)
+        }
+        const listsCount = 5
+        let listNum = 1
+        while(listNum <= listsCount) {
+            const headerEl = document.createElement('h2')
+            headerEl.innerText = `List №${listNum}`
+            document.getElementsByClassName('violet-form')[0].append(headerEl)
+            generateList()
+            listNum++
+        }
+
+        function colorList(listCollection) {
+            let color = listCollection.length % 2 === 0 ? 'green' : 'red'
+            for(let item of listCollection)
+                item.style.color = color
+        }
+
+        function analysisList() {
+            const thisBtn = this
+            let listEl = thisBtn.nextElementSibling
+            console.log(listEl.nextElementSibling)
+            while(listEl != null) {
+                console.log(listEl)
+                console.log(listEl.nextElementSibling)
+                if(listEl.tagName === 'OL') 
+                    colorList(listEl.children)
+                listEl = listEl.nextElementSibling
+            }
+        }
+        const colorBtn = document.querySelector('.violet-form button')
+        const colorOdd = 'red'
+        const colorEven = 'green'
+
+        colorBtn.onclick = analysisList // планувала кольори передати параметрами при виклику  функціі 
+        //() => analysisList(colorOdd, colorEven), але в такому випадку губиться this елемента, що викликав функцію
+        
+    </script>
+</body>
+</html>

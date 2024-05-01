@@ -1,0 +1,177 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 7</title>
+    <link rel="stylesheet" href="../css/style.css">
+>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 7</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Подорож складається з 3 етапів. На кожному етапі користувач може вибрати один з видів транспорту (авто, автобус, літак -
+                випадаючий список), харчування (сніданок, обід, вечеря – checkbоx) та одного з 3-х гідів(використати - radio buttons).
+                Ціни визначте самі. Підрахувати загальну вартість.
+            </p>
+            <div style="width: 200px; display: inline-block" class="violet-form violet-block">
+                <h2>Перший етап</h2>
+                <label for="transport">Вид транспорту</label>
+                <select name="transport">
+                    <option value="200">Авто</option>
+                    <option value="100">Автобус</option>
+                    <option value="500">Літак</option>
+                </select>
+                
+                <span>Харчування</span> <br>
+                
+                <input type="checkbox" id="breakfest" value="20">
+                <label for="breakfest">Сніданок 20 грн</label><br>
+
+                <input type="checkbox" id="lunch" value="50">
+                <label for="lunch">Обід 50 грн</label><br>
+
+                <input type="checkbox" id="dinner" value="30">
+                <label for="dinner">Вечеря 30 грн</label><br>
+
+                <fieldset>
+                    <legend>Оберіть гіда</legend>
+                    <div>
+                        <input type="radio" id="ivan" name="gid" value="10"/>
+                        <label for="ivan">Іван 10 грн</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="semen" name="gid" value="50" />
+                        <label for="semen">Семен 50 грн</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="petro" name="gid" value="100" />
+                        <label for="petro">Петро 100 грн</label>
+                    </div>
+                </fieldset>
+            </div>
+            <div style="width: 200px; display: inline-block" class="violet-form violet-block">
+                <h2>Другий етап</h2>
+                <label for="transport">Вид транспорту</label>
+                <select name="transport">
+                    <option value="200">Авто</option>
+                    <option value="100">Автобус</option>
+                    <option value="500">Літак</option>
+                </select>
+            
+                <span>Харчування</span> <br>
+            
+                <input type="checkbox" id="breakfest2" value="20">
+                <label for="breakfest2">Сніданок 20 грн</label><br>
+            
+                <input type="checkbox" id="lunch2" value="50">
+                <label for="lunch2">Обід 50 грн</label><br>
+            
+                <input type="checkbox" id="dinner2"  value="30">
+                <label for="dinner2">Вечеря 30 грн</label><br>
+            
+                <fieldset>
+                    <legend>Оберіть гіда</legend>
+                    <div>
+                        <input type="radio" id="ivan2" name="gid2" value="10" />
+                        <label for="ivan2">Іван 10 грн</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="semen2" name="gid2" value="50" />
+                        <label for="semen2">Семен 50 грн</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="petro2" name="gid2" value="100" />
+                        <label for="petro2">Петро 100 грн</label>
+                    </div>
+                </fieldset>
+            </div>
+            <div style="width: 200px; display: inline-block" class="violet-form violet-block">
+                <h2>Третій етап</h2>
+                <label for="transport">Вид транспорту</label>
+                <select name="transport">
+                    <option value="200">Авто</option>
+                    <option value="100">Автобус</option>
+                    <option value="500">Літак</option>
+                </select>
+            
+                <span>Харчування</span> <br>
+            
+                <input type="checkbox" id="breakfest3" value="20">
+                <label for="breakfest3">Сніданок 20 грн</label><br>
+            
+                <input type="checkbox" id="lunch3" value="50">
+                <label for="lunch3">Обід 50 грн</label><br>
+            
+                <input type="checkbox" id="dinner3"value="30">
+                <label for="dinner3">Вечеря 30 грн</label><br>
+            
+                <fieldset>
+                    <legend>Оберіть гіда</legend>
+                    <div>
+                        <input type="radio" id="ivan3" name="gid3" value="10" />
+                        <label for="ivan3">Іван 10 грн</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="semen3" name="gid3" value="50" />
+                        <label for="semen3">Семен 50 грн</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="petro3" name="gid3" value="100" />
+                        <label for="petro3">Петро 100 грн</label>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="violet-form">
+                <button id="calc">Розрахувати</button><br>
+                <span>Вартість </span>
+                <span id="sum">__</span>
+                <span>грн </span>
+            </div>
+        </div>
+    </main>     
+    <script>
+        function calcCollectionCheckedSum(collection) {
+            let sum = 0
+            for (const item of collection) {
+                if (item.checked)
+                    sum += parseInt(item.value)
+            }
+            return sum
+        }
+
+        function calcCollectionSum(collection) {
+            let sum = 0
+            for (const item of collection) {
+                sum += parseInt(item.value)
+            }
+            return sum
+        }
+
+        function calcSum() {
+            let sum = 0
+            console.log(document.querySelectorAll('select'))
+            sum += calcCollectionSum(document.querySelectorAll('select'))
+            // sum += parseInt(document.getElementById('transport').value)
+
+            // sum +=calcCollectionCheckedSum(document.querySelectorAll('input[type=checkbox]'))
+            // sum += calcCollectionCheckedSum(document.querySelectorAll('input[type=radio]'))
+            
+            // одна функція рахує суму по всім інпутам і чекбоксам і радіо
+            sum += calcCollectionCheckedSum(document.querySelectorAll('input'))
+
+            document.getElementById('sum').innerText = sum
+        }
+        const calcBtn = document.getElementById('calc')
+        calcBtn.onclick = calcSum
+    </script>
+</body>
+</html>

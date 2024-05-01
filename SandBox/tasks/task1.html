@@ -1,0 +1,61 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+      .container {
+        font-size: 20px;
+        font-weight: 600;
+        color: #493481;
+      }
+    </style>
+    </head>
+<body>
+  
+   <div class="wrapper">
+        <header class="header">
+            <div class="header__container"> 
+                <h1>Задача 1</h1>
+            </div>
+        </header>   
+        <main class="page">
+            <div class="page__container">
+                <p>
+                    Дано 10 рядків тексту «Hello!» у окремих div. При кліку на якийсь із них усі наступні повинні бути зафарбовані у
+                    червоний колір.
+                </p>
+                <div class="container">
+                  <div class="hi">«Hello!»</div>
+                  <div class="hi">«Hello!»</div>
+                  <div class="hi">«Hello!»</div>
+                  <div class="hi">«Hello!»</div>
+                  <div class="hi">«Hello!»</div>
+                  <div class="hi">«Hello!»</div>
+                  <div class="hi">«Hello!»</div>
+                  <div class="hi">«Hello!»</div>
+                  <div class="hi">«Hello!»</div>
+                  <div class="hi">«Hello!»</div>
+                </div>
+            </div>
+        </main>     
+    </div>
+    <script>
+      function colorTrxt() {
+        let thisDiv = this
+        thisDiv.style.color = 'red'
+        while(thisDiv.nextElementSibling != null) {
+          thisDiv = thisDiv.nextElementSibling
+          thisDiv.style.color = 'red'
+        }
+      }
+
+      const divList = document.getElementsByClassName('hi')
+      for(const divEl of divList) {
+        divEl.onclick = colorTrxt
+      }
+    </script>
+</body>
+</html> 

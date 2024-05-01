@@ -1,0 +1,103 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        table {
+            margin: 20px;
+
+        }
+
+        .red-border {
+            outline: 2px solid red;
+        }
+
+        td {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 4</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Дано 3 таблиці розмірності 3*3 з випадковими числами. Якщо відбувається клік на якійсь із клітинок, то до відповідної
+                таблиці додається червона рамка (спробуйте додати можливість відображення кількості кліків біля назви таблиці з
+                використанням відповідно доданого для цього атрибута).
+            </p>
+            <div class="violet-form">
+
+            </div>
+            
+    
+        </div>
+    </main>     
+    <script>
+        const tableCount = 3
+        const rowCount = 3
+        const colCount = 3
+
+        function insertItemToForm(item) {
+            document.getElementsByClassName('violet-form')[0].append(item)
+        }
+
+        function getRandom(min = 0, max = 10) {
+            return min + Math.floor(Math.random() * (max - min + 1))
+        }
+
+        function generateTable(rowCount, colCount) {
+            let tableEl = document.createElement('table')
+            tableEl.setAttribute('clicks','0')
+            for(let row = 0; row < rowCount; row++) {
+                let trEl = document.createElement('tr')
+                for(let col = 0; col < colCount; col++) {
+                    let tdEl = document.createElement('td')
+                    tdEl.innerText = getRandom()
+                    trEl.append(tdEl)
+                }
+                tableEl.append(trEl)
+            }
+            return tableEl
+        }
+
+        for(let tableNum = 0; tableNum < tableCount; tableNum++) {
+            let counterLabel = document.createElement('span')
+            counterLabel.innerText = 'Кількість кліків по таблиці:'
+            insertItemToForm(counterLabel)
+            let counterCnt = document.createElement('span')
+            counterCnt.innerText = 0
+            insertItemToForm(counterCnt)
+            insertItemToForm(generateTable(rowCount, colCount))
+        }
+
+        function setTableBorder() {
+            let td = this
+            let parentTable = td.closest('table')
+            parentTable.className = 'red-border'
+            let clicks = parseInt(parentTable.getAttribute('clicks'))
+            parentTable.previousElementSibling.innerText = ++clicks
+            parentTable.setAttribute('clicks', clicks)
+
+        }
+
+        let tdList = document.getElementsByTagName('td')
+        for(let td of tdList) {
+            td.onclick = setTableBorder
+        }
+        
+
+    </script>
+</body>
+</html>
