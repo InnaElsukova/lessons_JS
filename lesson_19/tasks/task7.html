@@ -48,8 +48,6 @@
         jump() {
             const stepLeft = this.getRandomStep(-this.maxStep, this.maxStep)
             const stepTop = this.getRandomStep(this.minStep, this.maxStep)
-            // this.el.style.left = `${this.el.style.left + stepLeft}px`
-            // this.el.style.top = `${this.el.style.right + stepTop}px`
             const screenHeight = window.innerHeight
             let newTop = parseInt(this.el.style.top) + stepTop
             if(newTop > screenHeight) 
@@ -71,7 +69,7 @@
             snowflake.style.left = '0'
             snowflake.style.top = '100px'
             document.body.append(snowflake)
-            setInterval(this.jump.bind(this), 500)
+            setInterval(() => this.jump(), 500)
             return snowflake
         }
        }
