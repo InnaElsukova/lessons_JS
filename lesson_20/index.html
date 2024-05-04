@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 20</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        #filters,
+        #auto-list {
+            padding: 10px;
+            border: 2px solid var(--dark-violet);
+            border-radius: 30px;
+            width: 400px;
+        }
+        #filters {
+            display: flex;
+            justify-content: space-around;
+            align-items: center; 
+        }
+        .auto-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .auto-container div {
+            width: 30%;
+            text-align: center;
+        }
+        h2 {
+            text-align: left;
+        }
+    </style>
+    <script>
+        class Auto {
+            constructor(autoData) {
+                this.autoData = autoData
+                this.el = this.render()
+            }
+
+            createAutoItem(parentContainer, innerText, selector) {
+                const autoItem = document.createElement(selector)
+                autoItem.innerText = innerText
+                parentContainer.append(autoItem)
+
+            }
+
+            render() {
+                const autoContainer = document.createElement('div')
+                autoContainer.className = 'auto-container'
+                this.createAutoItem(autoContainer, this.autoData.model, 'div')
+                this.createAutoItem(autoContainer, this.autoData.year, 'div')
+                this.createAutoItem(autoContainer, `${this.autoData.price} $`, 'div')
+                
+                document.getElementById('auto-list').append(autoContainer)
+                return autoContainer
+            }
+
+        }
+
+        class AutoPark {
+            constructor(autoList) {
+                this.autoList = autoList
+                this.el = this.render()
+            }
+
+            createAutolist(autoList) {
+                const autoContainer = document.createElement('div')
+                for(const autoData of autoList) {
+                    const auto = new Auto(autoData)
+                    autoContainer.append(auto.el)
+                }
+                return autoContainer
+            }
+
+            fillSelect(parentContainer, childList) {
+                for (const childItem of childList) {
+                    const child = document.createElement('option')
+                    child.innerText = childItem
+                    child.setAttribute('value', childItem)
+                    parentContainer.append(child)
+                }
+            }
+
+            updateList() {
+                let model = document.getElementById('model').value
+                let year = document.getElementById('year').value
+                
+                let filteredAutolist= this.autoList
+                if(model != 'all')
+                    filteredAutolist = filteredAutolist.filter(auto => auto.model === model)
+                if (year !== 'all') {
+                    year = parseInt(year)
+                    filteredAutolist = filteredAutolist.filter(auto => auto.year === year)
+                }
+
+                let autoList = document.getElementById('auto-list')
+                for(let child of autoList.children) {
+                    console.log(child)
+                    child.remove()
+                }
+                autoList.append(this.createAutolist(filteredAutolist))
+            }
+
+            createModelsList() {
+                const selectModel = document.getElementById('model')
+                const modelList = new Set(['all',...this.autoList.map(auto => auto.model)])
+                this.fillSelect(selectModel, modelList)
+                selectModel.onchange = this.updateList.bind(this)
+            }
+
+            createYearsList() {
+                const selectYear = document.getElementById('year')
+                const yearList = new Set(['all', ...this.autoList.map(auto => auto.year)])
+                this.fillSelect(selectYear, [...yearList].sort((a, b) => b-a))
+                selectYear.onchange = this.updateList.bind(this)
+            }
+
+            render() {
+                let autoList = document.getElementById('auto-list')
+                autoList.append(this.createAutolist(this.autoList))
+                this.createModelsList()
+                this.createYearsList()
+                const modelList = document.getElementById('model')
+                return autoList
+            }
+        }
+
+
+        const autoList = [
+            { model: 'Mersedes', year: 2018, price: 25000 },
+            { model: 'Mersedes', year: 2022, price: 75000 },
+            { model: 'Mersedes', year: 2020, price: 35300 },
+            { model: 'Audi', year: 2019, price: 15250 },
+            { model: 'Audi', year: 2022, price: 27700 },
+            { model: 'Audi', year: 2023, price: 35100 },
+            { model: 'Honda', year: 2023, price: 95700 },
+            { model: 'Honda', year: 2000, price: 15000 }
+        ]
+
+        window.onload = function () {
+            const autos = new AutoPark(autoList)
+            
+        }
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header__container">
+                <h1>Homework №20</h1>
+            </div>
+        </header>
+        <main class="page">
+            <div class="page__container">
+                <h2>Завдання</h2>
+                    <h3>Задача 1</h3>
+                    <p>
+                        Дано список автомобілів (марка, рік випуску, ціна). Сформувати елементи для фільтрування з використанням випадаючого
+                        списку (контент цих випадаючих списків сформувати у залежності від переданого списку).
+                    </p>
+            </div>
+
+            <div class="violet-form">
+                <h2>Фільтри пошуку</h2>
+                <div id="filters">
+
+                    <label for="model">
+                        Модель
+                        <select name="model" id="model"></select>
+                    </label>
+                    
+                    <label for="year">
+                        Рік випуску
+                        <select name="year" id="year"></select>
+                    </label>
+                    
+                </div>
+
+                <h2>Список авто</h2>
+                <div id="auto-list">
+
+                </div>
+            </div>
+        </main>
+        <footer>
+    
+        </footer>
+</body>
+</html>
