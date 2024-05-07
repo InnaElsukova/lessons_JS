@@ -1,0 +1,141 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+      #log div {
+        margin: 10px;
+      }
+    </style>
+    </head>
+<body>
+  
+   <div class="wrapper">
+        <header class="header">
+            <div class="header__container"> 
+                <h1>Задача 1</h1>
+            </div>
+        </header>   
+        <main class="page">
+            <div class="page__container">
+                <p>
+                    ДСтворити клас Client. <br>
+                    Властивості - ID, ПІБ, Кількість грошей на рахунку.<br>
+                    Методи - Додавання грошей, Зняття грошей, ToString<br>
+                    
+                    На основі цього класу створити клас GoldenClient <br>
+                    Властивості - ID, ПІБ, Кількість грошей на рахунку, Ліміт кредитних коштів, Відсоток за використання кредитних
+                    коштів<br>
+                    Методи - Додавання грошей, Зняття грошей, Визначення пені за використання кредитних коштів, ToString
+                </p>
+                <div id="log">
+
+                </div>
+            </div>
+        </main>     
+    </div>
+    <script src="../js/script.js"></script>
+    <script>
+      class Client {
+        #id
+        get Id() {
+          return this.#id
+        }
+        set Id(id) {
+          if(isNaN(id))
+            throw new Error ('id should be number')
+          this.#id = id
+        }
+
+        constructor(id, fullName, accountSum) {
+          this.Id = id
+          this.fullName = fullName
+          this.accountSum = accountSum
+        }
+
+        addMoney(sum) {
+          this.accountSum += sum
+        }
+
+        removeMoney(sum) {
+          if(sum > this.accountSum) 
+            throw new Error(`Неможливо зняти більше, ніж є на рахунку (${this.accountSum})`)
+          this.accountSum -= sum
+        }
+
+        toString() {
+          return `Власник рахунку: ${this.fullName.firstName} ${this.fullName.secondName} (ID: ${this.Id}), сума на рахунку ${this.accountSum} грн.`
+        }
+      }
+
+      class GoldenClient extends Client{
+        constructor(id, fullName, accountSum, creditLimit, creditPersent) {
+          super(id, fullName, accountSum)
+          this.creditLimit = creditLimit
+          this.creditPersent = creditPersent
+        }
+
+        addMoney(sum) {
+          return super.addMoney(sum)
+        }
+
+        removeMoneyForGolden(sum) {
+          let amount = this.accountSum - sum
+          if(amount < -this.creditLimit)
+            throw new Error(`Перевищено кредитний ліміт на (${amount - this.creditLimit})`)
+          this.accountSum = amount
+        }
+
+        calcPersent() {
+          let persentAmount
+          if(this.accountSum >= 0)
+            persentAmount = 0
+          else {
+            persentAmount = Math.abs(this.accountSum) * this.creditPersent / (100 * 12)
+          }
+          return persentAmount
+        }
+
+        toString() {
+          return `Золотий клієнт! ${super.toString()} Кредитний ліміт ${this.creditLimit}, % за користуванням кредиту ${this.creditPersent}% на рік`
+        }
+
+      }
+
+      let clientVasya = new Client(1234455, {firstName: 'Василь', secondName: 'Петренко'}, 8800)
+      
+      let message = `- Створено об"єкт класу Client: ${clientVasya}`
+      writeLog(message)
+
+      let sumToAdd = 3000
+      clientVasya.addMoney(sumToAdd)
+      message = `- Рахунок попопвнено на ${sumToAdd}грн.  Статус: ${clientVasya}`
+      writeLog(message)
+
+      let sumToRemove = 2350
+      clientVasya.removeMoney(sumToRemove)
+      message = `- З рахунку знято ${sumToRemove}грн. Статус: ${clientVasya}`
+      writeLog(message)
+// -----------------------------------------------------------------------------
+      let clientGolden = new GoldenClient(9999009, { firstName: 'Іван', secondName: 'Коваль' }, 10500, 5000, 20) 
+      message = `- Створено об"єкт класу GoldenClient: ${clientGolden}`
+      writeLog(message)
+
+      sumToAdd = 10
+      clientGolden.addMoney(sumToAdd)
+      message = `- Рахунок попопвнено на ${sumToAdd}грн.  Статус: ${clientGolden}`
+      writeLog(message)
+
+      sumToRemove = 15000
+      clientGolden.removeMoneyForGolden(sumToRemove)
+      message = `- З рахунку знято ${sumToRemove}грн. Статус: ${clientGolden}`
+      writeLog(message)
+
+      message = `- Пеня за використання кредитних коштів ${clientGolden.calcPersent().toFixed(2) }грн. на місяць`
+      writeLog(message)
+    </script>
+</body>
+</html> 

@@ -1,0 +1,152 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 4</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        table {
+            margin: 20px;
+
+        }
+
+        .red-border {
+            outline: 2px solid red;
+        }
+
+        td {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 4</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Користувач задає місяць навчання учня (перевіряти чи є числом, чи від 1 до 12, чи не канікули) та оцінку (перевіряти чи
+                є числом, чи від 1 до 100). Вивести чи зможе він виправити оцінку (якщо оцінка погана і це не останній місяць у
+                семестрі) . Обробку усіх помилок зробити з використанням відповідних класів.
+            </p>
+            <div class="violet-form">
+                <label for="month">Місяць навчання</label>
+                <input type="number" name="month" id="month">
+
+                <label for="score">Оцінка</label>
+                <input type="number" name="score" id="score">
+
+                <button id="calc">Розрахувати</button>
+                <span id="result"></span>
+            </div>
+        </div>
+    </main>     
+    <script>
+
+        class IsNotValidLearningMonthNum extends Error {
+            constructor() {
+                super()
+                this.message = 'Номер місяця має бути від 1 до 5 або від 9 до 12.'
+                this.name = 'IsNotValidLearningMonthNum'
+            }
+        }
+
+        class IsNotValidScore extends Error {
+                constructor() {
+                    super()
+                    this.message = 'Оцінка має бути від 1 до 100.'
+                    this.name = 'IsNotValidScore'
+                }
+        }
+
+        class IsNotNumberError extends Error {
+                constructor() {
+                    super()
+                    this.message = 'Має бути числом.'
+                    this.name = 'IsNotNumberError'
+                }
+        }
+
+        function checkCorrectMonth(value) {
+            try {
+                let checkingValue = parseInt(value)
+                if (isNaN(checkingValue)) throw new IsNotNumberError()
+                if (checkingValue < 1 || checkingValue > 12 || (checkingValue > 5 && checkingValue < 9)) throw new IsNotValidLearningMonthNum()
+            }
+            catch (err) {
+                if (err instanceof IsNotNumberError)
+                    console.log(err.message + ' Поле не може бути порожнім')
+                else if (err instanceof IsNotValidLearningMonthNum)
+                    console.log(err.message + ' Введіть коректний номер')
+                else
+                    console.log(err.message)
+                return false
+            }
+            return true
+        }
+
+        function checkCorrectScore(value, minScore, maxScore) {
+            try {
+                let checkingValue = parseInt(value)
+                if (isNaN(checkingValue)) throw new IsNotNumberError()
+                if (checkingValue < minScore || checkingValue > maxScore ) throw new IsNotValidScore()
+            }
+            catch (err) {
+                if (err instanceof IsNotNumberError)
+                    console.log(err.message + ' Поле не може бути порожнім')
+                else if (err instanceof IsNotValidScore)
+                    console.log(err.message + ' Введіть коректний номер')
+                else
+                    console.log(err.message)
+                return false
+            }
+            return true        
+        }
+
+        function printAnswear(mes) {
+            let mesEl = document.getElementById('result')
+            mesEl.innerText = mes
+            document.getElementsByClassName('violet-form')[0].append(mesEl)
+        }
+
+        function AnalysisScore(badScore) {
+            let monthEl = document.getElementById('month')
+            let scoreEl = document.getElementById('score')
+
+            let month = parseInt(monthEl.value)
+            let isMonthValid = checkCorrectMonth(monthEl.value)
+
+            let score = parseInt(scoreEl.value)
+            let isScoreValid = checkCorrectScore(scoreEl.value, 1, 100)
+
+            let mes
+            if(isMonthValid && isScoreValid) {
+                if (score <= badScore) {
+                    if (month === 5)
+                        mes = 'Останній місяць навчання - оцінку не встигне виправити('
+                    else
+                        mes = 'Встигне виправити оцінку'
+                }
+                else
+                    mes = 'Оцінка гарна - виправляти не треба)'
+            }
+            else
+                mes = 'Некоректні дані'            
+            printAnswear(mes)
+        }
+
+        const badScore = 60
+        let btnCalc = document.getElementById('calc')
+        btnCalc.onclick = () => AnalysisScore(badScore)
+
+    </script>
+</body>
+</html>

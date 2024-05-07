@@ -1,0 +1,167 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2</title>
+    <link rel="stylesheet" href="../css/style.css">
+ 
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 2</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Створити клас Bank, у якому зберігається масив клієнтів. Виконати такі операції
+                <ol class="subtasks">
+                    <li>Вивести всіх простих клієнтів;</li>
+                    <li>Вивести всіх клієнтів GoldenClient;</li>
+                    <li>Знайти сумарну кількість грошей на рахунку;</li>
+                </ol>
+            </p>
+            <div id="log">
+            
+            </div>
+        </div>
+    </main>   
+    <script src="../js/script.js"></script>
+    <script>
+        class Client {
+            #id
+            get Id() {
+                return this.#id
+            }
+            set Id(id) {
+                if (isNaN(id))
+                    throw new Error('id should be number')
+                this.#id = id
+            }
+
+            constructor(id, fullName, accountSum) {
+                this.Id = id
+                this.fullName = fullName
+                this.accountSum = accountSum
+            }
+
+            addMoney(sum) {
+                this.accountSum += sum
+            }
+
+            removeMoney(sum) {
+                if (sum > this.accountSum)
+                    throw new Error(`Неможливо зняти більше, ніж є на рахунку (${this.accountSum})`)
+                this.accountSum -= sum
+            }
+
+            toString() {
+                return `Власник рахунку: ${this.fullName.firstName} ${this.fullName.secondName} (ID: ${this.Id}), сума на рахунку ${this.accountSum} грн.`
+            }
+        }
+
+        class GoldenClient extends Client {
+            constructor(id, fullName, accountSum, creditLimit, creditPersent) {
+                super(id, fullName, accountSum)
+                this.creditLimit = creditLimit
+                this.creditPersent = creditPersent
+            }
+
+            addMoney(sum) {
+                return super.addMoney(sum)
+            }
+
+            removeMoneyForGolden(sum) {
+                let amount = this.accountSum - sum
+                if (amount < -this.creditLimit)
+                    throw new Error(`Перевищено кредитний ліміт на (${amount - this.creditLimit})`)
+                this.accountSum = amount
+            }
+
+            calcPersent() {
+                let persentAmount
+                if (this.accountSum >= 0)
+                    persentAmount = 0
+                else {
+                    persentAmount = Math.abs(this.accountSum) * this.creditPersent / (100 * 12)
+                }
+                return persentAmount
+            }
+
+            toString() {
+                return `Золотий клієнт! ${super.toString()} Кредитний ліміт ${this.creditLimit}, % за користуванням кредиту ${this.creditPersent}% на рік`
+            }
+
+        }
+
+        class Bank {
+            constructor(clientList) {
+              
+                this.clientList = clientList
+            }
+
+            printSimpleClient() {
+                let mes = ""
+                for (let client of this.clientList) {
+                    if (!(client instanceof GoldenClient))
+                        mes += client.toString() + "\n"
+                }
+                return mes
+            }
+
+            printGoldenClient () {
+                let mes = ""
+                for(let client of this.clientList) {
+                    if(client instanceof GoldenClient)
+                        mes += client.toString() + "\n"
+                }
+                return mes
+            }
+
+            getTotalAmount() {
+                return this.clientList.reduce(
+                    (prevSum, client) => prevSum + client.accountSum,
+                0)
+            }
+
+            toString() {
+                let mes = ""
+                for (let client of this.clientList) {
+                    mes += client.toString() + "\n"
+                }
+                return mes
+            }
+        }
+
+        let clientList = [
+            new Client(1234455, { firstName: 'Василь', secondName: 'Петренко' }, 8800),
+            new Client(2234455, { firstName: 'Семен', secondName: 'Іванов' }, 2000),
+            new Client(3234455, { firstName: 'Софія', secondName: 'Коваль' }, 25000),
+            new Client(4234455, { firstName: 'Ірина', secondName: 'Петренко' }, 100),
+            new GoldenClient(9999009, { firstName: 'Іван', secondName: 'Коваль' }, 100500, 20000, 20),
+            new GoldenClient(8999009, { firstName: 'Сергій', secondName: 'Сергієнко' }, 1500, 500, 17),
+            new GoldenClient(7999009, { firstName: 'Ганна', secondName: 'Швець' }, 27500, 5000, 19),
+            new GoldenClient(6999009, { firstName: 'Соломія', secondName: 'Бондар' }, 50000, 7000, 22) 
+        ]
+
+        let bank = new Bank(clientList)
+        
+        let message = `- Створено об"єкт класу Bank: \n${bank}\n`
+        writeLog(message)
+
+        message = `- Сформовано список клієнтів зі статусом "GoldenClient": \n${bank.printGoldenClient()}\n`
+        writeLog(message)
+
+        message = `- Сформовано список клієнтів зі статусом "Client": \n${bank.printSimpleClient()}\n`
+        writeLog(message)
+
+        message = `- Сумарна кількість грошей на рахунку: ${bank.getTotalAmount()} грн`
+        writeLog(message)
+
+    </script>
+</body>
+</html> 

@@ -1,0 +1,167 @@
+    <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        #image-field {
+            width: 100%;
+            height: 700px;
+            border: 1px solid black;
+            position: relative;
+        }
+        #image-field img{
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header__container">
+            <h1>Задача 3</h1>
+        </div>
+    </header>   
+
+    <main class="page">
+        <div class="page__container">
+            <p>
+                Розробити Класи: House<br>
+                --- властивості ---<br>
+                <ol class="subtasks">
+                    <li>Координата Х</li>
+                    <li>Координата У</li>
+                    <li>шлях до зображення</li>
+                    <li>інтервал оновлення</li>
+                </ol>
+                --- методи ---<br>
+                <ol class="subtasks">
+                    <li>генерування елемента розмітки</li>
+                    <li>оновлення через вказаний інтервал (збільшення або зменшення масштабу (об’єкт не рухається)</li>
+                </ol>
+                Dog<br>
+                --- властивості ---<br>
+                <ol class="subtasks">
+                    <li>Координата Х</li>
+                    <li>Координата У</li>
+                    <li>шлях до зображення</li>
+                    <li>інтервал оновлення</li>
+                </ol>
+                --- методи ---<br>
+                <ol class="subtasks">
+                    <li>генерування елемента розмітки</li>
+                    <li>оновлення через вказаний інтервал (випадкове зміщення по горизонталі (зміна координати Х))</li>
+                </ol>
+                Bird<br>
+                --- властивості ---<br>
+                <ol class="subtasks">
+                    <li>Координата Х</li>
+                    <li>Координата У</li>
+                    <li>шлях до зображення</li>
+                    <li>інтервал оновлення</li>
+                </ol>
+                --- методи ---<br>
+                <ol class="subtasks">
+                    <li>генерування елемента розмітки</li>
+                    <li>оновлення через вказаний інтервал (випадкове переміщення у довільному напрямку)</li>
+                </ol>
+                Подумайте яким має бути спільний клас предок.
+                <div id="image-field">
+
+                </div>
+            </p>
+        </div>
+    </main>     
+    <script>
+        let width = document.getElementById('image-field').clientWidth
+        let height = document.getElementById('image-field').clientHeight
+        const itemWidth = 100
+        function getRandom (min = 0.5, max = 5) {
+            return min + Math.floor(Math.random() * (max - min + 1))
+        }
+
+        class Entity {
+            constructor(coordinateX, coordinateY, imgPath, updateInterval, itemWidth) {
+                this.coordinateX = coordinateX
+                this.coordinateY = coordinateY
+                this.imgPath = imgPath
+                this.updateInterval = updateInterval
+                this.itemWidth = itemWidth
+                this.el = this.render()
+            }
+
+            render() {
+                const entity = document.createElement('img')
+                entity.setAttribute('src', this.imgPath)
+                entity.style.left = `${this.coordinateX}px`
+                entity.style.top = `${this.coordinateY}px`
+                document.getElementById('image-field').append(entity)
+                return entity
+            }
+        }
+
+        class House extends Entity {
+            constructor(coordinateX, coordinateY, imgPath, updateInterval, itemWidth) {
+                super(coordinateX, coordinateY, imgPath, updateInterval, itemWidth)
+            }
+
+            refresh() {
+                setInterval(() => {
+                    this.el.style.width = `${this.itemWidth * getRandom()}px`
+                } , this.updateInterval)
+            }
+        }
+
+        class Dog extends Entity {
+            constructor(coordinateX, coordinateY, imgPath, updateInterval,  itemWidth, fieldWidth) {
+                super(coordinateX, coordinateY, imgPath, updateInterval, itemWidth)
+                this.fieldWidth = fieldWidth
+            }
+
+            moveX() {
+                let newX = getRandom(0, this.fieldWidth - this.itemWidth )
+                this.el.style.left = `${newX}px`
+            }
+
+            refresh() {
+                setInterval(() => {
+                    this.moveX()
+                }, this.updateInterval)
+            }
+        }
+
+        class Bird extends Entity{
+            constructor(coordinateX, coordinateY, imgPath, updateInterval, itemWidth, fieldWidth, fieldHeight) {
+                super(coordinateX, coordinateY, imgPath, updateInterval, itemWidth)
+                this.fieldWidth = fieldWidth
+                this.fieldHeight = fieldHeight
+            }  
+            
+            moveItem() {
+                let newX = getRandom(0, this.fieldWidth - this.itemWidth)
+                let newY = getRandom(0, this.fieldHeight - this.itemWidth)
+                this.el.style.left = `${newX}px`
+                this.el.style.top = `${newY}px`
+            }
+            refresh() {
+                setInterval(() => {
+                    this.moveItem()
+                    console.log(this.el)
+                }, this.updateInterval)
+            }
+        }
+
+        let house = new House(200, 0, 'img/house.svg', 2000, itemWidth, width)
+        house.refresh()
+
+        let dog = new Dog(width - itemWidth, height / 2, 'img/dog.svg', 1000, itemWidth, width)
+        dog.refresh()
+
+        let bird = new Bird(0, height - itemWidth, 'img/bird.svg', 3000, itemWidth, width, height)
+        bird.refresh()
+
+    </script>
+</body>
+</html>
